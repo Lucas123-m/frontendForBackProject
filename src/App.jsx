@@ -1,5 +1,5 @@
 import './App.css'
-import AnimesContainer from './components/animesContainer'
+import AnimesContainer from './components/AnimesContainer/AnimesContainer'
 
 function App() {
   return (

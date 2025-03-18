@@ -1,3 +1,5 @@
+import Container from "../Container";
+
 function AnimesContainer (){
     /// = > path to public folder inside my project!
     const animes = [
@@ -60,14 +62,7 @@ function AnimesContainer (){
     ]
         
     const animeBoxes = animes.map((anime)=> 
-        <div className="anime-box">
-            <img src={anime.imgSrc} alt={anime.alt}></img>
-            <p className="anime-title">Title: {anime.title}.</p>
-            <p className="n-seasons">Seasons: {anime.seasons}.</p>
-            <p className="genre">Genres: {(anime.genres).join(", ")}.</p>
-            <button type="button" className="btn-anime btn-edit">Edit anime</button>
-            <button type="button" className="btn-anime btn-delete">Delete anime</button>
-        </div>
+        <Container animeObj={anime}/>
     )
     return (
         <div className="container" id="animes-container">

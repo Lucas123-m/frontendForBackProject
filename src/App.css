@@ -33,16 +33,6 @@ body {
   gap: 10px;
 }
 
-/*.btn {
-  background-color: var(--gunmetal);
-  background-image: linear-gradient(var(--delft-blue), var(--gunmetal));
-  border: 3px solid var(--gunmetal);
-  font-size: 2em;
-  color: var(--periwinkle);
-  margin: 10px 10px;
-  width: 250px;
-}*/
-
 .btn {
   width: 130px;
   height: 40px;
