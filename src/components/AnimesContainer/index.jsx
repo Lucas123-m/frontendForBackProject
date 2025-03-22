@@ -1,4 +1,4 @@
-import Container from "../Container";
+import Container from '../Container'
 
 function AnimesContainer (){
     /// = > path to public folder inside my project!
@@ -60,13 +60,11 @@ function AnimesContainer (){
             genres: ['Isekai','Comedy','Music']
         },
     ]
-        
-    const animeBoxes = animes.map((anime)=> 
-        <Container animeObj={anime}/>
-    )
     return (
         <div className="container" id="animes-container">
-            {animeBoxes}
+           {animes.map(({imgSrc, title, alt, seasons, genres})=>
+                <Container imgSrc={imgSrc} title={title} alt={alt} seasons={seasons} genres={genres}></Container>
+           )}    
         </div>
     )
 }
