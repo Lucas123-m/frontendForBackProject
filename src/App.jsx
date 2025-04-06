@@ -1,20 +1,20 @@
 import './App.css'
-import AnimesContainer from './components/AnimesContainer'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import MainPage from './components/Pages/main.jsx'
+import Edit from './components/Pages/editEntry.jsx'
 
-function App() {
+export default function App(){
   return (
     <>
-      <h1 className="title">My fav animes!</h1>
-      <main>
-          <div className="animes-buttons">
-              <button id="show-animes" className="btn btn-show"><span>Show Animes</span></button>
-              <button id="add-anime" className="btn btn-add"><span>New Anime</span></button>
-          </div>
-          <hr></hr>
-          <AnimesContainer />
-      </main>
+      <BrowserRouter>
+        <Routes>
+          <Route exact path="/" element={<MainPage/>} />
+          <Route exact path="/edit" element={<Edit/>} />
+          <Route exact path="/newEntry" element={<MainPage/>} />
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
 
-export default App
+
