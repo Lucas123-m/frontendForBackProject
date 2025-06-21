@@ -1,6 +1,9 @@
 import { NavLink } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export default function Edit(){
+    const {title,genres, seasons} = useLocation().state
+
     return (
     <>
         <div className="sectionEdit">
@@ -8,18 +11,18 @@ export default function Edit(){
             <div className="dataToModify">
                 <div className="formGroup">  
                     <label htmlFor="titleInp">Title: </label>
-                    <input type="text" id="titleInp" readOnly={true}/>
+                    <input type="text" id="titleInp" readOnly={true} value={title}/>
                 </div>
                 <div className="formGroup">
                     <label htmlFor="seasonsInp">Number of anime seasons: </label>
-                    <input type="text" id="seasonsInp"/>
+                    <input type="text" id="seasonsInp" readOnly={true} value={seasons}/>
                 </div>
                 <div className="formGroup">
                     <label htmlFor="genresInp">Genres: </label>
-                    <input type="text" id="genresInp"/>
+                    <input type="text" id="genresInp" readOnly={true} value={genres.join(", ")}/>
                 </div>
                 <div className="formGroup">
-                    <label htmlFor="image">Front page: </label>
+                    <label htmlFor="imageInp">Front page: </label>
                     <input type="file" id="imageInp" accept="image/png, image/jpeg" />
                 </div>
             </div>
