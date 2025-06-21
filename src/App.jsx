@@ -1,8 +1,8 @@
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import MainPage from './components/Pages/main.jsx'
-import Edit from './components/Pages/editEntry.jsx'
-
+import MainPage from './Pages/main.jsx'
+import Edit from './Pages/editEntry.jsx'
+import NewEntry from './Pages/newEntry.jsx'
 export default function App(){
   return (
     <>
@@ -10,7 +10,7 @@ export default function App(){
         <Routes>
           <Route exact path="/" element={<MainPage/>} />
           <Route exact path="/edit" element={<Edit/>} />
-          <Route exact path="/newEntry" element={<MainPage/>} />
+          <Route exact path="/newEntry" element={<NewEntry/>} />
         </Routes>
       </BrowserRouter>
     </>

@@ -1,5 +1,5 @@
-import AnimesContainer from "../AnimesContainer"
-
+import AnimesContainer from "../components/AnimesContainer"
+import { NavLink } from "react-router-dom"
 export default function MainPage(){
     return (      
         <>
@@ -7,7 +7,7 @@ export default function MainPage(){
             <main>
                 <div className="animes-buttons">
                     <button id="show-animes" className="btn btn-show"><span>Show Animes</span></button>
-                    <button id="add-anime" className="btn btn-add"><span>New Anime</span></button>
+                    <button id="add-anime" className="btn btn-add"><NavLink to="/newEntry">New Anime</NavLink></button>
                 </div>
                 <hr></hr>
                 <AnimesContainer />
