@@ -20,6 +20,9 @@ body {
   text-align: center;
   padding: 10px;
 }
+main {
+  margin-top:20px;
+}
 .title {
   color: var(--platinum);
   font-size: 3em;
