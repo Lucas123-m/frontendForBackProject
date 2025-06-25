@@ -1,18 +1,32 @@
 import AnimesContainer from "../components/AnimesContainer"
 import { NavLink } from "react-router-dom"
 import { useState, useEffect } from "react"
+
+const BASE_URL = "http://localhost:3000/animes"
+
 export default function MainPage(){
-    const [dataAnimes,setData] = useState(null)
-    const url = "http://localhost:3000/animes/series"
-    const getData = async ()=>{
-        const response = await fetch(url)
-        const data = await response.json()
+    const [dataAnimes,setData] = useState([])
+
+    /*useEffect(() => {
+        setLoading(true)
+        fetch(`http://localhost:3000/animes/series`)
+        .then(response => response.json())
+            // 4. Setting *dogImage* to the image url that we received from the response above
+        .then(data => setData(data))
+        setLoading(false)
+      },[])*/
+    const fetchData = async()=>{
+        const res = await fetch("http://localhost:3000/animes/series");
+        const data = await res.json();
         setData(data)
+        
     }
     useEffect(()=>{
-        getData()
+        fetchData()
     },[])
-    console.log("data:",dataAnimes)
+    if (dataAnimes.length===0){
+        return <div>Loading...</div>
+    }
     return (      
         <>
             <h1 className="title">My fav animes!</h1>
@@ -21,7 +35,7 @@ export default function MainPage(){
                     <button id="add-anime" className="btn btn-add"><NavLink to="/newEntry">New Anime</NavLink></button>
                 </div>
                 <hr></hr>
-                <AnimesContainer/>
+                <AnimesContainer animes={dataAnimes}/>
             </main>
         </>
     )
