@@ -53,10 +53,6 @@ export default function Edit(){
                         <input type="text" id="seasonsInp"/>
                     </div>
                     <div className="formGroup">
-                        <label htmlFor="genresInp">Genres: </label>
-                        <input type="text" id="genresInp"/>
-                    </div>
-                    <div className="formGroup">
                         <label htmlFor="imageInp">Front page: </label>
                         <input type="file" id="imageInp" accept="image/png, image/jpeg"/>
                     </div>

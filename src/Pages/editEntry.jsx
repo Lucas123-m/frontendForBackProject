@@ -21,9 +21,7 @@ function handleSubmit(event){
 
 export default function Edit(){
     const {title,seasons} = useLocation().state
-    const genres = useLocation().state.genres.join(", ")
     const [titleState,setTitle] = useState(title)
-    const [genresState,setGenres] = useState(genres)
     const [seasonsState,setSeasons] = useState(seasons)
 
     function handleTitle(event){
@@ -34,9 +32,6 @@ export default function Edit(){
         setSeasons(event.target.value)
     }
 
-    function handleGenres(event){
-        setGenres(event.target.value)
-    }
     return (
     <>
         <div className="sectionEdit">
@@ -50,10 +45,6 @@ export default function Edit(){
                     <div className="formGroup">
                         <label htmlFor="seasonsInp">Number of anime seasons: </label>
                         <input type="text" id="seasonsInp" value={seasonsState} onChange={handleSeasons}/>
-                    </div>
-                    <div className="formGroup">
-                        <label htmlFor="genresInp">Genres: </label>
-                        <input type="text" id="genresInp" value={genresState} onChange={handleGenres}/>
                     </div>
                     <div className="formGroup">
                         <label htmlFor="imageInp">Front page: </label>
