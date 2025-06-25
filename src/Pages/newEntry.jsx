@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import {animes} from '../scripts/data'
+//import { animes } from '../scripts/data'
 
 function discardChanges(){
     const inputs = document.getElementsByTagName('input')
@@ -8,20 +8,35 @@ function discardChanges(){
     }
 }
 
-function handleSubmit(event){
+const handleSubmit =  async (event) => {
     event.preventDefault()
+    //const img = event.target.getElementsByTagName("input")[3].files[0]
+    const cloud_name = "dgak0vgg2"
+    const preset_name = "anime_images"
     const data = Array.from(event.target.getElementsByTagName("input")) //htmlCollection of elements
-    console.log("imgSrc: ",data[3].value)
-    const anime = {
+    const file_img = data[3].files[0]
+    /*const anime = {
         imgSrc: data[3].value,
         alt: data[0].value,
         title: data[0].value,
         seasons: data[1].value,
         genres: [data[2].value]
-    }
-    animes.push(anime)
+    }*/
+    console.log(data[3].files[0])
+    //console.log(event.target.files[0])
+    
+    //animes.push(anime)
+    const url_post = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`
+    const form = new FormData()
+    form.append("file",file_img)
+    form.append("upload_preset",preset_name)
+    form.append("cloud_name",cloud_name)
+    const response = await fetch(url_post,{method:"POST",body: form}) //Sube la imagen sin validar si existe antes, ojo
+    const uploadedImageUrl = await response.json()
+    console.log(uploadedImageUrl.url)
     discardChanges()    
 }
+
 export default function Edit(){
     return (
     <>
@@ -43,7 +58,7 @@ export default function Edit(){
                     </div>
                     <div className="formGroup">
                         <label htmlFor="imageInp">Front page: </label>
-                        <input type="file" id="imageInp" accept="image/png, image/jpeg" />
+                        <input type="file" id="imageInp" accept="image/png, image/jpeg"/>
                     </div>
                 </div>
                 <div className="btns-edit-container">
