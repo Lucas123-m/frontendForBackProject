@@ -38,6 +38,7 @@ const handleSubmit =  async (event) => {
 }
 
 export default function Edit(){
+    const options = [{value: 'planned',label: 'planned'},{value: 'watching',label: 'watching'},{value: 'completed',label: 'completed'},{value: 'on_hold',label: 'on_hold'},{value: 'dropped',label: 'dropped'}]
     return (
     <>
         <div className="sectionAdd">
@@ -46,14 +47,36 @@ export default function Edit(){
                 <div className="dataToModify">
                     <div className="formGroup">  
                         <label htmlFor="titleInp">Title: </label>
-                        <input type="text" id="titleInp"/>
+                        <input type="text" id="titleInp" required/>
                     </div>
                     <div className="formGroup">
-                        <label htmlFor="seasonsInp">Number of anime seasons: </label>
+                        <label htmlFor="seasonsInp">Number of seasons (optional): </label>
                         <input type="text" id="seasonsInp"/>
                     </div>
                     <div className="formGroup">
-                        <label htmlFor="imageInp">Front page: </label>
+                        <label htmlFor="chaptersInp">Number of chapters (optional): </label>
+                        <input type="text" id="chaptersInp"/>
+                    </div>
+                    <div className="formGroup">
+                        <label htmlFor="authorInp">Author: </label>
+                        <input type="text" id="authorInp" required/>
+                    </div>
+                    <div className="formGroup">
+                        <label htmlFor="watchStatusInp">Watch status: </label>
+                        <select name="Watch Status" id="watchStatusInp" required>
+                            {options.map(({value,label})=>{return <option value={value}>{label}</option>})}
+                        </select>
+                    </div>
+                    <div className="formGroup">
+                        <label htmlFor="descriptionInp">Description (optional): </label>
+                        <input type="text" id="descriptionInp"/>
+                    </div>
+                    <div className="formGroup">
+                        <label htmlFor="reviewInp">Review (optional): </label>
+                        <input type="text" id="reviewInp"/>
+                    </div>
+                    <div className="formGroup">
+                        <label htmlFor="imageInp">Img (optional): </label>
                         <input type="file" id="imageInp" accept="image/png, image/jpeg"/>
                     </div>
                 </div>
