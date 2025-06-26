@@ -6,15 +6,6 @@ const BASE_URL = "http://localhost:3000/animes"
 
 export default function MainPage(){
     const [dataAnimes,setData] = useState([])
-
-    /*useEffect(() => {
-        setLoading(true)
-        fetch(`http://localhost:3000/animes/series`)
-        .then(response => response.json())
-            // 4. Setting *dogImage* to the image url that we received from the response above
-        .then(data => setData(data))
-        setLoading(false)
-      },[])*/
     const fetchData = async()=>{
         const res = await fetch("http://localhost:3000/animes/series");
         const data = await res.json();
