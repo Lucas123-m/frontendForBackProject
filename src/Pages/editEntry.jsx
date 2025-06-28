@@ -23,8 +23,10 @@ export default function Edit(){
     const handlereview = (event)=>{setReview(event.target.value)}
     const handleimgSrc = (event)=>{setImgSrc(event.target.value)}
     
+    const url_api=`http://localhost:3000/animes/series`
+    
     const fetchData = async()=>{
-        const res = await fetch(`http://localhost:3000/animes/series/${idState}`);
+        const res = await fetch(`${url_api}/${idState}`);
         const data = await res.json();
 
         setTitle(data[0].title)
@@ -44,7 +46,6 @@ export default function Edit(){
     const handleSubmit = async (event) => {
         event.preventDefault()
     
-        const url_post_api=`http://localhost:3000/animes/series`
         const bodyData = {
             title: title, author: author,watch_status: watchStatus
         }
@@ -55,7 +56,7 @@ export default function Edit(){
         if (imgSrc){bodyData["imgSrc"] = imgSrc}
         
         console.log("datos submit:",bodyData,JSON.stringify(bodyData))
-        const response = await fetch(`${url_post_api}/${idState}`,{method:"PUT",  
+        const response = await fetch(`${url_api}/${idState}`,{method:"PUT",  
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8'
             }
@@ -118,58 +119,4 @@ export default function Edit(){
             </form>
         </div>
     </>
-)
-/*
-    const options = [{value: 'planned',label: 'planned'},{value: 'watching',label: 'watching'},{value: 'completed',label: 'completed'},{value: 'on_hold',label: 'on_hold'},{value: 'dropped',label: 'dropped'}]
-    return (
-    <>
-        <div className="sectionAdd">
-            <h1 className="title">Add an anime</h1>
-            <form onSubmit={handleSubmit}>
-                <div className="dataToModify">
-                    <div className="formGroup">  
-                        <label htmlFor="titleInp">Title: </label>
-                        <input type="text" id="titleInp" required/>
-                    </div>
-                    <div className="formGroup">
-                        <label htmlFor="seasonsInp">Number of seasons (optional): </label>
-                        <input type="text" id="seasonsInp"/>
-                    </div>
-                    <div className="formGroup">
-                        <label htmlFor="chaptersInp">Number of chapters (optional): </label>
-                        <input type="text" id="chaptersInp"/>
-                    </div>
-                    <div className="formGroup">
-                        <label htmlFor="authorInp">Author: </label>
-                        <input type="text" id="authorInp" required/>
-                    </div>
-                    <div className="formGroup">
-                        <label htmlFor="watchStatusInp">Watch status: </label>
-                        <select name="Watch Status" id="watchStatusInp" required>
-                            {options.map(({value,label})=>{return <option key={value} value={value}>{label}</option>})}
-                        </select>
-                    </div>
-                    <div className="formGroup">
-                        <label htmlFor="descriptionInp">Description (optional): </label>
-                        <input type="text" id="descriptionInp"/>
-                    </div>
-                    <div className="formGroup">
-                        <label htmlFor="reviewInp">Review (optional): </label>
-                        <input type="text" id="reviewInp"/>
-                    </div>
-                    <div className="formGroup">
-                        <label htmlFor="imageInp">Img (optional): </label>
-                        <input type="file" id="imageInp" accept="image/png, image/jpeg"/>
-                    </div>
-                </div>
-                <div className="btns-edit-container">
-                    <button type="submit" className="btns-edit btn-confirm">Confirm</button>
-                    <button type="button" className="btns-edit btn-go">
-                        <NavLink to="/" className="go-back-link link">Go back</NavLink>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </>
-)*/
-}
+)}
