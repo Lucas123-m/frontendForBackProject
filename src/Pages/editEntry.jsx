@@ -59,8 +59,8 @@ export default function Edit(){
     },[])
 
     console.log(dataAnime[0])
-    console.log(title,author,chapters,watchStatus)
-    console.log("chapters: ",chapters," seasons: ",seasons," review: ",review," description: ",description," imgSrc: ",imgSrc)
+    //console.log(title,author,chapters,watchStatus)
+    //console.log("chapters: ",chapters," seasons: ",seasons," review: ",review," description: ",description," imgSrc: ",imgSrc)
     
     /*
     const [title,setTitle] = useState(dataAnime[0].title)
