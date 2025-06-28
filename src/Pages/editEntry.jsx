@@ -1,28 +1,10 @@
 import { NavLink } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { animes } from '../scripts/data'
 import { useEffect,useState } from "react";
-
-function handleSubmit(event){
-    event.preventDefault()
-    const data = Array.from(event.target.getElementsByTagName("input")) //htmlCollection of elements
-    console.log("imgSrc: ",data[3].value)
-    const anime = {
-        imgSrc: data[3].value,
-        alt: data[0].value,
-        title: data[0].value,
-        seasons: data[1].value,
-        genres: [data[2].value]
-    }
-    const indexAnime = animes.findIndex((elem)=>{return elem.title===anime.title})
-    animes[indexAnime]=anime
-    console.log(indexAnime)    
-}
 
 export default function Edit(){
     const {idState} = useLocation().state
 
-    const [dataAnime,setData] = useState([])
     const [title,setTitle] = useState()
     const [seasons,setSeasons] = useState()
     const [chapters,setChapters] = useState()
@@ -44,7 +26,7 @@ export default function Edit(){
     const fetchData = async()=>{
         const res = await fetch(`http://localhost:3000/animes/series/${idState}`);
         const data = await res.json();
-        setData(data)
+
         setTitle(data[0].title)
         setSeasons(data[0].seasons || '')
         setChapters(data[0].chapters || '')
@@ -58,21 +40,30 @@ export default function Edit(){
         fetchData()
     },[])
 
-    console.log(dataAnime[0])
-    //console.log(title,author,chapters,watchStatus)
-    //console.log("chapters: ",chapters," seasons: ",seasons," review: ",review," description: ",description," imgSrc: ",imgSrc)
-    
-    /*
-    const [title,setTitle] = useState(dataAnime[0].title)
-    const [seasons,setSeasons] = useState(dataAnime[0].seasons || '')
-    const [chapters,setChapters] = useState(dataAnime[0].chapters || '')
-    const [author,setAuthor] = useState(dataAnime[0].author)
-    const [watchStatus,setWatchStatus] = useState(dataAnime[0].watch_status)
-    const [description,setDescription] = useState(dataAnime[0].description || '')
-    const [review,setReview] = useState(dataAnime[0].review || '')
-    const [imgSrc,setImgSrc] = useState(dataAnime[0].imgSrc || '')*/
-
     const options = [{value: 'planned',label: 'planned'},{value: 'watching',label: 'watching'},{value: 'completed',label: 'completed'},{value: 'on_hold',label: 'on_hold'},{value: 'dropped',label: 'dropped'}]
+    const handleSubmit = async (event) => {
+        event.preventDefault()
+    
+        const url_post_api=`http://localhost:3000/animes/series`
+        const bodyData = {
+            title: title, author: author,watch_status: watchStatus
+        }
+        if (seasons){bodyData["seasons"] = seasons}
+        if (chapters){bodyData["chapters"] = chapters}
+        if (description){bodyData["description"] = description}
+        if (review){bodyData["review"] = review}
+        if (imgSrc){bodyData["imgSrc"] = imgSrc}
+        
+        console.log("datos submit:",bodyData,JSON.stringify(bodyData))
+        const response = await fetch(`${url_post_api}/${idState}`,{method:"PUT",  
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8'
+            }
+        ,body: JSON.stringify(bodyData)})
+        const retorno = await response.json()
+        console.log(response,retorno)
+    
+    }
     return (
     <>
         <div className="sectionAdd">

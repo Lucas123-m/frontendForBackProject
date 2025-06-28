@@ -1,44 +1,14 @@
 import { NavLink } from "react-router-dom";
-//import { animes } from '../scripts/data'
 
 function discardChanges(){
     const inputs = document.getElementsByTagName('input')
     for (let input of inputs){
         input.value = ""
     }
+    const select = document.getElementsByTagName("select")
+    select[0].value = "planned"
 }
 
-/*const handleImage =  async (event) => {
-    event.preventDefault()
-    //const img = event.target.getElementsByTagName("input")[3].files[0]
-    const cloud_name = "dgak0vgg2"
-    const preset_name = "anime_images"
-    const data = Array.from(event.target.getElementsByTagName("input")) //htmlCollection of elements
-    const file_img = data[3].files[0]
-    /*
-    const anime = {
-        imgSrc: data[3].value,
-        alt: data[0].value,
-        title: data[0].value,
-        seasons: data[1].value,
-        genres: [data[2].value]
-    }
-    */
-    /*console.log(data[3].files[0])
-    //console.log(event.target.files[0])
-    
-    //animes.push(anime)
-    const url_post = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`
-    const form = new FormData()
-    form.append("file",file_img)
-    form.append("upload_preset",preset_name)
-    form.append("cloud_name",cloud_name)
-    const response = await fetch(url_post,{method:"POST",body: form}) //Sube la imagen sin validar si existe antes, ojo
-    const uploadedImageUrl = await response.json()
-    console.log(uploadedImageUrl.url)
-    discardChanges()    
-}
-*/
 const handleSubmit = async (event) => {
     event.preventDefault()
 
@@ -107,7 +77,7 @@ export default function Edit(){
                     <div className="formGroup">
                         <label htmlFor="watchStatusInp">Watch status: </label>
                         <select name="Watch Status" id="watchStatusInp" required>
-                            {options.map(({value,label})=>{return <option value={value}>{label}</option>})}
+                            {options.map(({value,label})=>{return <option id={value} value={value}>{label}</option>})}
                         </select>
                     </div>
                     <div className="formGroup">
