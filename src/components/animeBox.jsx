@@ -3,7 +3,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import ReadMoreIcon from '@mui/icons-material/ReadMore';
 
-export default function Container({imgSrc, title, alt, seasons,id,onDelete}){
+export default function AnimeBox({imgSrc, title, alt, seasons,id,onDelete}){
     const deleteAnime =  async (id)=>{
         const url_api=`http://localhost:3000/animes/series`
         const res = await fetch(`${url_api}/${id}`,{method: "DELETE"});
@@ -22,7 +22,9 @@ export default function Container({imgSrc, title, alt, seasons,id,onDelete}){
                 </NavLink>
             </button>
             <button type="button" className="btn-anime btn-see">
-                <ReadMoreIcon sx={{ fontSize: 20 }}></ReadMoreIcon>
+                <NavLink to={`/content/${id}`} state={{title: title}}className="edit link">
+                    <ReadMoreIcon sx={{ fontSize: 20 }}></ReadMoreIcon>
+                </NavLink>
             </button>
             <button type="button" className="btn-anime btn-delete" onClick={()=> 
                 {

@@ -1,10 +1,10 @@
-import Container from './Container'
+import AnimeBox from './animeBox'
 
 function AnimesContainer ({animes, onDelete}){
     return (
         <div className="container" id="animes-container">
            {animes.map(({id,imgSrc, title, alt="Not Found", seasons})=>
-                <Container key={title} imgSrc={imgSrc} title={title} alt={alt} seasons={seasons} id={id} onDelete={onDelete}></Container>
+                <AnimeBox key={title} imgSrc={imgSrc} title={title} alt={alt} seasons={seasons} id={id} onDelete={onDelete}></AnimeBox>
            )}    
         </div>
     )

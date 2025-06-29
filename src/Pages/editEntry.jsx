@@ -1,5 +1,5 @@
 import { NavLink,useParams } from "react-router-dom";
-import { useEffect,useState } from "react";
+import { useState } from "react";
 
 export default function Edit(){
     const {id} = useParams()
@@ -36,10 +36,7 @@ export default function Edit(){
         setReview(data[0].review || '')
         setImgSrc('')
     }
-    useEffect(()=>{
-        fetchData()
-    },[])
-
+    fetchData()
     const options = [{value: 'planned',label: 'planned'},{value: 'watching',label: 'watching'},{value: 'completed',label: 'completed'},{value: 'on_hold',label: 'on_hold'},{value: 'dropped',label: 'dropped'}]
     const handleSubmit = async (event) => {
         event.preventDefault()
