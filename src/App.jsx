@@ -9,7 +9,7 @@ export default function App(){
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<MainPage/>} />
-          <Route exact path="/edit" element={<Edit/>} />
+          <Route exact path="/edit/:id" element={<Edit/>} />
           <Route exact path="/newEntry" element={<NewEntry/>} />
         </Routes>
       </BrowserRouter>

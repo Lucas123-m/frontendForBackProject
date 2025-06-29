@@ -96,7 +96,7 @@ img {
 }
 
 .btn-anime,.btns-edit {
-  width: 75px;
+  width: 50px;
   height: 30px;
   font-size: 0.75em;
   border: none;
@@ -113,13 +113,14 @@ img {
   bottom: 20px;
   left:10%;
   font-style:normal;
+  text-align: center;
 }
 
-.btn-edit  {
+.btn-edit {
   background: linear-gradient(0deg, rgb(9, 97, 14) 0%, rgb(19, 112, 7) 100%);
 }
 
-.btn-edit:hover {
+.btn-edit:hover, .btn-see:hover {
   background: linear-gradient(0deg, rgb(3, 136, 25) 0%, rgb(47, 175, 21) 100%);
 }
 
@@ -132,6 +133,22 @@ img {
 
 .btn-delete:hover {
   background: linear-gradient(0deg, rgb(202, 4, 4) 0%, rgb(214, 6, 6) 100%);
+}
+
+.btn-see {
+  position: absolute; 
+  bottom: 20px;
+  left:40%;
+  font-style:normal;
+  text-align: center;
+}
+
+.btn-see {
+  background: linear-gradient(0deg, rgb(41, 4, 221) 0%, rgb(4, 0, 255) 100%);
+}
+
+.btn-see:hover, .btn-see:hover {
+  background: linear-gradient(0deg, rgb(0, 76, 255) 0%, rgb(0, 38, 255) 100%);
 }
 
 .btns-edit {

@@ -1,10 +1,8 @@
-import { NavLink } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { NavLink,useParams } from "react-router-dom";
 import { useEffect,useState } from "react";
 
 export default function Edit(){
-    const {idState} = useLocation().state
-
+    const {id} = useParams()
     const [title,setTitle] = useState()
     const [seasons,setSeasons] = useState()
     const [chapters,setChapters] = useState()
@@ -26,7 +24,7 @@ export default function Edit(){
     const url_api=`http://localhost:3000/animes/series`
     
     const fetchData = async()=>{
-        const res = await fetch(`${url_api}/${idState}`);
+        const res = await fetch(`${url_api}/${id}`);
         const data = await res.json();
 
         setTitle(data[0].title)
@@ -56,7 +54,7 @@ export default function Edit(){
         if (imgSrc){bodyData["imgSrc"] = imgSrc}
         
         console.log("datos submit:",bodyData,JSON.stringify(bodyData))
-        const response = await fetch(`${url_api}/${idState}`,{method:"PUT",  
+        const response = await fetch(`${url_api}/${id}`,{method:"PUT",  
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8'
             }
@@ -73,7 +71,7 @@ export default function Edit(){
                 <div className="dataToModify">
                     <div className="formGroup">  
                         <label htmlFor="id">ID: </label>
-                        <input type="text" value={idState} id="id" readOnly/>
+                        <input type="text" value={id} id="id" readOnly/>
                     </div>
                     <div className="formGroup">  
                         <label htmlFor="titleInp">Title: </label>
