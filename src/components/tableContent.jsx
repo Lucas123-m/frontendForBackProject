@@ -1,30 +1,14 @@
-import { useEffect, useState } from "react"
 import "./tableContent.css"
+import { NavLink } from 'react-router-dom';
 
+export default function TableAnimeContent({data}) {
 
-export default function TableAnimeContent(id) {
-
-    const [data,setData] = useState([])
-    const [changes,setChanges] = useState(false)
-    const url_api = `http://localhost:3000/animes/series`
-    console.log("id en TableAnimeContent:",id.id,typeof(id.id))
-
-    useEffect(()=>{
-        const getData = async () => {
-            const response = await fetch(`${url_api}/contents`)
-            const data = await response.json()
-            setData(data)
-            setChanges(false)
-        }
-        getData()
-    },[changes])
-
-
-    const dataFiltered = data.filter((content)=> {
-        return content.id_serie==id.id
-    })
-    console.log(dataFiltered)
-
+    const deleteContent = async(id)=>{
+        const url_api = `http://localhost:3000/animes/series`
+        const response = await fetch(`${url_api}/contents/${id}`,{method: "DELETE"})
+        const data = await response.json()
+        console.log(data)
+    }
     return (
         <>
             <table className="tableAnimeContent">
@@ -41,7 +25,7 @@ export default function TableAnimeContent(id) {
                     </tr>
                 </thead>
                 <tbody>
-                    {dataFiltered.map(({id,title_content,type,watch_order,chapters,review,duration})=>
+                    {data.map(({id,title_content,type,watch_order,chapters,review,duration})=>
                         <tr key={id}>
                             <td>{id}</td>
                             <td>{title_content}</td>
@@ -50,8 +34,14 @@ export default function TableAnimeContent(id) {
                             <td>{chapters}</td>
                             <td>{review}</td>
                             <td>{duration}</td>
-                            <td><button>Edit</button></td>
-                            <td><button>Delete</button></td>
+                            <td>
+                                <button >                
+                                    <NavLink to={`/content/edit/${id}`} className="edit link">
+                                        Edit
+                                    </NavLink>
+                                </button>
+                            </td>
+                            <td><button onClick={()=>{deleteContent(id)}}>Delete</button></td>
                         </tr>
                     )} 
                 </tbody>
