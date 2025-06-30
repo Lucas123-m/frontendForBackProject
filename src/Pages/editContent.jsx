@@ -17,7 +17,10 @@ export default function EditContent(){
     const handletitle = (event)=>{setTitle(event.target.value)}
     const handletype = (event)=>{setType(event.target.value)}
     const handlewatchOrder = (event)=>{setWatchOrder(event.target.value)}
-    const handlewatchStatus = (event)=>{setWatchStatus(event.target.value)}
+    const handlewatchStatus = (event)=>{setWatchStatus(
+        event.target.value)
+        console.log(watchStatus)
+    }
     const handleduration = (event)=>{setDuration(event.target.value)}
     const handlechapters = (event)=>{setChapters(event.target.value)}
     const handlereview = (event)=>{setReview(event.target.value)}
@@ -29,7 +32,7 @@ export default function EditContent(){
         const fetchData = async()=>{
             const res = await fetch(`${url_api}/contents/${id}`);
             const data = await res.json();
-    
+            console.log(data)
             setIdSerie(data[0].id_serie)
             setTitle(data[0].title_content)
             setType(data[0].type)
@@ -47,20 +50,18 @@ export default function EditContent(){
     const options_watch_status = [{value: 'planned',label: 'planned'},{value: 'watching',label: 'watching'},{value: 'completed',label: 'completed'},{value: 'on_hold',label: 'on_hold'},{value: 'dropped',label: 'dropped'}]
     const options_type = [{value: 'season',label: 'season'},{value: 'film',label: 'film'},{value: 'ova',label: 'ova'}]
     
-    /*const handleSubmit = async (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault()
     
         const bodyData = {
-            title: title, author: author,watch_status: watchStatus
+            title: title, type: type,watch_status: watchStatus,id_serie: idSerie, duration: duration
         }
-        if (seasons){bodyData["seasons"] = seasons}
+        if (watchOrder){bodyData["watch_order"] = watchOrder}
         if (chapters){bodyData["chapters"] = chapters}
-        if (description){bodyData["description"] = description}
         if (review){bodyData["review"] = review}
-        if (imgSrc){bodyData["imgSrc"] = imgSrc}
         
         console.log("datos submit:",bodyData,JSON.stringify(bodyData))
-        const response = await fetch(`${url_api}/${id}`,{method:"PUT",  
+        const response = await fetch(`${url_api}/contents/${id}`,{method:"PUT",  
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8'
             }
@@ -68,12 +69,13 @@ export default function EditContent(){
         const retorno = await response.json()
         console.log(response,retorno)
     
-    }*/
+    }
+    console.log(watchStatus,type)
     return (
     <>
         <div className="sectionAdd">
             <h1 className="title">Edit anime content: </h1>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div className="dataToModify">
                     <div className="formGroup">  
                         <label htmlFor="id">ID: </label>
