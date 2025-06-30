@@ -6,25 +6,26 @@ export default function AnimeContent(){
     const { id } = useParams()
     const [title,setTitle] = useState("")
     const [data,setData] = useState([])
-
+    const [deleted,setDelete] = useState(false)
     useEffect(()=>{
         const fetchTitle = async()=>{
             const res = await fetch(`http://localhost:3000/animes/series/${id}`);
             const dataTitle = await res.json();
             setTitle(dataTitle[0].title)
-            //console.log("title:",title)
         }
         const fetchData = async ()=>{
             const res = await fetch(`http://localhost:3000/animes/series/contents`);
             const dataObtenida = await res.json();
             const dataFiltered = await dataObtenida.filter(content=>content.id_serie==id)
             setData(dataFiltered)
-            //console.log("data: ",data)
         }
         fetchTitle()
         fetchData()
-    },[])
-
+        setDelete(false)
+    },[deleted])
+    const onDelete = async ()=>{
+        setDelete(true)
+    }
     if (data.length == 0 || title.length==0) {
         return (<><p>Cargando datos...</p></>)
     }
@@ -45,7 +46,7 @@ export default function AnimeContent(){
                 </div>
             </div>
             <hr />
-            <TableAnimeContent data={data}></TableAnimeContent>
+            <TableAnimeContent data={data} onDelete={onDelete}></TableAnimeContent>
             <button type="button" className="btns-edit btn-go">
                 <NavLink to="/" className="go-back-link link">Go back</NavLink>
             </button>
