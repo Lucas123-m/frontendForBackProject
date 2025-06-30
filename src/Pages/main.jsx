@@ -10,13 +10,11 @@ export default function MainPage(){
     const fetchData = async()=>{
         const res = await fetch("http://localhost:3000/animes/series");
         const data = await res.json();
-        console.log("datos fetch:",data)
         setData(data)
         
     }
     useEffect(()=>{
         fetchData()
-        setDelete(false)
     },[deleteState])
 
     return (      

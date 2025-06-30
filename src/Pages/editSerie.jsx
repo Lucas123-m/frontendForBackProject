@@ -63,7 +63,7 @@ export default function Edit(){
     return (
     <>
         <div className="sectionAdd">
-            <h1 className="title">Add an anime</h1>
+            <h1 className="title">Edit an anime</h1>
             <form onSubmit={handleSubmit}>
                 <div className="dataToModify">
                     <div className="formGroup">  

@@ -1,4 +1,4 @@
-import { Link,NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete'; 
 import EditIcon from '@mui/icons-material/Edit';
 import ReadMoreIcon from '@mui/icons-material/ReadMore';
@@ -8,8 +8,8 @@ export default function AnimeBox({imgSrc, title, alt, seasons,id,onDelete}){
         const url_api=`http://localhost:3000/animes/series`
         const res = await fetch(`${url_api}/${id}`,{method: "DELETE"});
         const data = await res.json();
-        onDelete(true)
-        console.log(data)
+        console.log("resultado de borrar:",data)
+        onDelete(c => !c)
     }
     return (
         <div className="anime-box">
@@ -22,7 +22,7 @@ export default function AnimeBox({imgSrc, title, alt, seasons,id,onDelete}){
                 </NavLink>
             </button>
             <button type="button" className="btn-anime btn-see">
-                <NavLink to={`/content/${id}`} state={{title: title}}className="edit link">
+                <NavLink to={`/content/${id}`} className="edit link">
                     <ReadMoreIcon sx={{ fontSize: 20 }}></ReadMoreIcon>
                 </NavLink>
             </button>
