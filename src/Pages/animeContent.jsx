@@ -26,8 +26,6 @@ export default function AnimeContent(){
     const onDelete = async ()=>{
         setDelete(true)
     }
-
-    console.log(data,title)
     return (<>
         <h1 className="title">Contents: </h1>
         <main>

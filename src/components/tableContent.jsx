@@ -2,7 +2,6 @@ import "./tableContent.css"
 import { NavLink } from 'react-router-dom';
 
 export default function TableAnimeContent({data,onDelete}) {
-
     const deleteContent = async(id)=>{
         const url_api = `http://localhost:3000/animes/series`
         const response = await fetch(`${url_api}/contents/${id}`,{method: "DELETE"})
