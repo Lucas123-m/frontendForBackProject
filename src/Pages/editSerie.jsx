@@ -1,8 +1,9 @@
 import { NavLink,useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Edit(){
     const {id} = useParams()
+
     const [title,setTitle] = useState("")
     const [seasons,setSeasons] = useState("")
     const [chapters,setChapters] = useState("")
@@ -10,7 +11,12 @@ export default function Edit(){
     const [watchStatus,setWatchStatus] = useState("")
     const [description,setDescription] = useState("")
     const [review,setReview] = useState("")
-    const [imgFile,setImgFile] = useState("")
+
+    const [urlImage,setUrlImage] = useState(null)
+    const [idImage,setIdImage] = useState(0)
+    const [imgName,setImgName] = useState("N/A")
+
+    const [images,setImages] = useState([])
 
     const handletitle = (event)=>{setTitle(event.target.value)}
     const handleseasons = (event)=>{setSeasons(event.target.value)}
@@ -19,23 +25,51 @@ export default function Edit(){
     const handlewatchStatus = (event)=>{setWatchStatus(event.target.value)}
     const handledescription = (event)=>{setDescription(event.target.value)}
     const handlereview = (event)=>{setReview(event.target.value)}
-    const handleimgFile = (event)=>{setImgFile(event.target.files[0])}
+    const handleimageName = (event)=>{
+        console.log(event.target.selectedOptions[0].text,event.target.value)
+        setIdImage(parseInt(event.target.value))
+        setImgName(event.target.selectedOptions[0].text)
+        setUrlImage(event.target.selectedOptions[0].id)
+    }
     
     const url_api=`http://localhost:3000/animes/series`
+    useEffect(()=>{
+        const fetchData = async()=>{
+            const res = await fetch(`${url_api}/${id}`);
+            const data = await res.json();
     
-    const fetchData = async()=>{
-        const res = await fetch(`${url_api}/${id}`);
-        const data = await res.json();
+            setTitle(data[0].title)
+            setSeasons(data[0].seasons || '')
+            setChapters(data[0].chapters || '')
+            setAuthor(data[0].author)
+            setWatchStatus(data[0].watch_status)
+            setDescription(data[0].description || '')
+            setReview(data[0].review || '')
+            setIdImage(data[0].idImage || 0)
+        }
+        fetchData()
+    
+        const fetchImages = async()=>{
+            const res = await fetch(`http://localhost:3000/animes/images/`);
+            const data = await res.json();
+            console.log("id image: ",idImage)
+            if (idImage){        
+                const dataImage = data.filter((elem)=> elem.id === idImage)
+                setImgName(dataImage.name)
+                setUrlImage(dataImage.url)
+                console.log("estado inicial, HAY dato previo:",imgName,urlImage)
 
-        setTitle(data[0].title)
-        setSeasons(data[0].seasons || '')
-        setChapters(data[0].chapters || '')
-        setAuthor(data[0].author)
-        setWatchStatus(data[0].watch_status)
-        setDescription(data[0].description || '')
-        setReview(data[0].review || '')
-    }
-    fetchData()
+            } else {
+                console.log("estado inicial, sin dato previo: ",imgName,"-",urlImage)
+            }
+            data.push({id:0,name:"N/A",url: null})
+            setImages(data)
+        }
+        fetchImages()
+    },[])
+
+    
+
     const options = [{value: 'planned',label: 'planned'},{value: 'watching',label: 'watching'},{value: 'completed',label: 'completed'},{value: 'on_hold',label: 'on_hold'},{value: 'dropped',label: 'dropped'}]
     const handleSubmit = async (event) => {
         event.preventDefault()
@@ -43,38 +77,21 @@ export default function Edit(){
         const bodyData = {
             title: title, author: author,watch_status: watchStatus
         }
-        console.log("object file:",imgFile)
-        if (imgFile){
-            const formImg = new FormData()
-            const cloud_name = "dgak0vgg2"
-            const url_post = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`
-            const preset_name = "anime_images"
-            formImg.append("file",imgFile)
-            formImg.append("upload_preset",preset_name)
-            formImg.append("cloud_name",cloud_name)
-            const responseImg = await fetch(url_post,{method:"POST",body: formImg})
-            const uploadedImageUrl = await responseImg.json()
-            if (responseImg.ok){
-                bodyData["imgSrc"] = uploadedImageUrl.url
-                bodyData["filename"] = imgFile.name
-            }
-        }
 
         if (seasons){bodyData["seasons"] = seasons}
         if (chapters){bodyData["chapters"] = chapters}
         if (description){bodyData["description"] = description}
         if (review){bodyData["review"] = review}
-
-        console.log("datos submit:",bodyData,JSON.stringify(bodyData))
+        if (idImage){bodyData["idImage"] = idImage}
         const response = await fetch(`${url_api}/${id}`,{method:"PUT",  
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8'
             }
         ,body: JSON.stringify(bodyData)})
         const retorno = await response.json()
-        console.log(response,retorno)
-    
+        console.log(retorno)    
     }
+    
     return (
     <>
         <div className="sectionAdd">
@@ -116,8 +133,14 @@ export default function Edit(){
                         <input type="text" value={review} id="reviewInp" onChange={handlereview}/>
                     </div>
                     <div className="formGroup">
-                        <label htmlFor="imageInp">Img (optional): </label>
-                        <input type="file" value={imgFile.path} id="imageInp" accept="image/png, image/jpeg" onChange={handleimgFile}/>
+                        <label htmlFor="imageModif">Img (optional): </label>
+                        <select value={imgName} name="image selection" id="imageModif" onChange={handleimageName} required>
+                            {images.map(({id,name,url})=>{return <option id={url} key={id} value={id}>{name}</option>})}
+                        </select>
+                    </div>
+                    <div className="formGroup">
+                        <label htmlFor="imageModif">Img selected: </label>
+                        <img src={urlImage || null} alt="N/A" />
                     </div>
                 </div>
                 <div className="btns-edit-container">

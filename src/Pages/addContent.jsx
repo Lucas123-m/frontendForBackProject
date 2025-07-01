@@ -23,7 +23,6 @@ export default function AddContent(){
         event.preventDefault()
         const inputs = event.target.getElementsByTagName("input")
         const selects = event.target.getElementsByTagName("select")
-        console.log(inputs)
         const bodyData = {
             id_serie: id,title: inputs[1].value, type: selects[0].value,watch_status: selects[1].value, 
             duration: inputs[4].value
@@ -32,7 +31,6 @@ export default function AddContent(){
         if (inputs[2].value){bodyData["chapters"] = inputs[2].value}
         if (inputs[5].value){bodyData["review"] = inputs[5].value}
         
-        console.log("datos submit:",bodyData,JSON.stringify(bodyData))
         const response = await fetch(`${url_api}/contents/`,{method:"POST",  
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8'

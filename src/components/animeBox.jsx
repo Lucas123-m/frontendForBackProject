@@ -8,7 +8,7 @@ export default function AnimeBox({imgSrc, title, alt, seasons,id,onDelete}){
         const url_api=`http://localhost:3000/animes/series`
         const res = await fetch(`${url_api}/${id}`,{method: "DELETE"});
         const data = await res.json();
-        console.log("resultado de borrar:",data)
+        console.log(data)
         onDelete(c => !c)
     }
     return (

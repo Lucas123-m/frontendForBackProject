@@ -19,7 +19,6 @@ export default function EditContent(){
     const handlewatchOrder = (event)=>{setWatchOrder(event.target.value)}
     const handlewatchStatus = (event)=>{setWatchStatus(
         event.target.value)
-        console.log(watchStatus)
     }
     const handleduration = (event)=>{setDuration(event.target.value)}
     const handlechapters = (event)=>{setChapters(event.target.value)}
