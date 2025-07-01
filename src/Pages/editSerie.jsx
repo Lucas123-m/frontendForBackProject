@@ -72,7 +72,8 @@ export default function Edit(){
     
 
     const options = [{value: 'planned',label: '1-planned'},{value: 'watching',label: '2-watching'},{value: 'completed',label: '3-completed'},{value: 'on_hold',label: '4-on_hold'},{value: 'dropped',label: '5-dropped'}]
-    /*const handleSubmit = async (event) => {
+    
+    const handleSubmit = async (event) => {
         event.preventDefault()
     
         const bodyData = {
@@ -92,14 +93,14 @@ export default function Edit(){
         const retorno = await response.json()
         console.log(retorno)  
         
-    }*/
+    }
 
     console.log("renderiza con: ",imgName,idImage,urlImage)
     return (
     <>
         <div className="sectionAdd">
             <h1 className="title">Edit an anime</h1>
-            <form onSubmit>
+            <form onSubmit={handleSubmit}>
                 <div className="dataToModify">
                     <div className="formGroup">  
                         <label htmlFor="id">ID: </label>

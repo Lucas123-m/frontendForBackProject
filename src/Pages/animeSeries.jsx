@@ -8,23 +8,24 @@ export default function MainPage(){
     const [dataAnimes,setData] = useState([])
     const [deleteState,setDelete] = useState(false) //para refrescar componente cuando se borra una serie
     const [dataImages,setImages] = useState([])
-    const fetchData = async()=>{
-        const res = await fetch("http://localhost:3000/animes/series");
-        const data = await res.json();
-        setData(data)
-        
-    }
-    const fetchImages = async()=>{
-        const res = await fetch("http://localhost:3000/animes/images");
-        const data = await res.json();
-        setImages(data)
-        
-    }
+
     useEffect(()=>{
+        const fetchData = async()=>{
+            const res = await fetch("http://localhost:3000/animes/series");
+            const data = await res.json();
+
+            setData(data)
+            
+        }
+        const fetchImages = async ()=>{
+            const response = await fetch("http://localhost:3000/animes/images")
+            const dataImgs = await response.json()
+
+            setImages(dataImgs)
+        }
         fetchData()
         fetchImages()
     },[deleteState])
-
     return (      
         <>
             <h1 className="title">My fav animes!</h1>
@@ -36,7 +37,7 @@ export default function MainPage(){
                     <button id="add-image" className="btn btn-add"><NavLink to="/newImage">New Image</NavLink></button>
                 </div>
                 <hr></hr>
-                <AnimesContainer animes={dataAnimes} images={dataImages} onDelete={setDelete}/>
+                <AnimesContainer animes={dataAnimes} onDelete={setDelete} images={dataImages}/>
             </main>
         </>
     )

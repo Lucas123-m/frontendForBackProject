@@ -4,6 +4,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import ReadMoreIcon from '@mui/icons-material/ReadMore';
 
 export default function AnimeBox({imgSrc, title, alt, seasons,id,onDelete}){
+    console.log("url a renderizar:",imgSrc)
     const deleteAnime =  async (id)=>{
         const url_api=`http://localhost:3000/animes/series`
         const res = await fetch(`${url_api}/${id}`,{method: "DELETE"});
