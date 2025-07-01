@@ -26,9 +26,7 @@ export default function AnimeContent(){
     const onDelete = async ()=>{
         setDelete(true)
     }
-    if (data.length == 0 || title.length==0) {
-        return (<><p>Cargando datos...</p></>)
-    }
+
     console.log(data,title)
     return (<>
         <h1 className="title">Contents: </h1>
@@ -36,7 +34,7 @@ export default function AnimeContent(){
             <div className="sectionAdd">
                 <div className="dataToModify">
                     <div className="formGroup">  
-                        <label htmlFor="id">ID: </label>
+                        <label htmlFor="id">ID serie: </label>
                         <input type="text" value={id} id="id" readOnly/>
                     </div>
                     <div className="formGroup">  
@@ -45,8 +43,11 @@ export default function AnimeContent(){
                     </div>
                 </div>
             </div>
-            <hr />
-            <TableAnimeContent data={data} onDelete={onDelete}></TableAnimeContent>
+            <hr />         
+                <TableAnimeContent data={data} onDelete={onDelete}></TableAnimeContent>
+            <button type="button" className="btns-edit btn-go">
+                <NavLink to="/content/new/" state={{id: id}} className="go-back-link link">Add content</NavLink>
+            </button>
             <button type="button" className="btns-edit btn-go">
                 <NavLink to="/" className="go-back-link link">Go back</NavLink>
             </button>
