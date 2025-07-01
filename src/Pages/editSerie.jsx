@@ -12,7 +12,7 @@ export default function Edit(){
     const [description,setDescription] = useState("")
     const [review,setReview] = useState("")
 
-    const [urlImage,setUrlImage] = useState(null)
+    const [urlImage,setUrlImage] = useState('')
     const [idImage,setIdImage] = useState(0)
     const [imgName,setImgName] = useState("N/A")
 
@@ -25,8 +25,9 @@ export default function Edit(){
     const handlewatchStatus = (event)=>{setWatchStatus(event.target.value)}
     const handledescription = (event)=>{setDescription(event.target.value)}
     const handlereview = (event)=>{setReview(event.target.value)}
+
     const handleimageName = (event)=>{
-        console.log(event.target.selectedOptions[0].text,event.target.value)
+        console.log(event.target.selectedOptions[0])
         setIdImage(parseInt(event.target.value))
         setImgName(event.target.selectedOptions[0].text)
         setUrlImage(event.target.selectedOptions[0].id)
@@ -62,7 +63,7 @@ export default function Edit(){
             } else {
                 console.log("estado inicial, sin dato previo: ",imgName,"-",urlImage)
             }
-            data.push({id:0,name:"N/A",url: null})
+            data.push({id:0,name:"N/A",url: ""})
             setImages(data)
         }
         fetchImages()
@@ -70,8 +71,8 @@ export default function Edit(){
 
     
 
-    const options = [{value: 'planned',label: 'planned'},{value: 'watching',label: 'watching'},{value: 'completed',label: 'completed'},{value: 'on_hold',label: 'on_hold'},{value: 'dropped',label: 'dropped'}]
-    const handleSubmit = async (event) => {
+    const options = [{value: 'planned',label: '1-planned'},{value: 'watching',label: '2-watching'},{value: 'completed',label: '3-completed'},{value: 'on_hold',label: '4-on_hold'},{value: 'dropped',label: '5-dropped'}]
+    /*const handleSubmit = async (event) => {
         event.preventDefault()
     
         const bodyData = {
@@ -89,14 +90,16 @@ export default function Edit(){
             }
         ,body: JSON.stringify(bodyData)})
         const retorno = await response.json()
-        console.log(retorno)    
-    }
-    
+        console.log(retorno)  
+        
+    }*/
+
+    console.log("renderiza con: ",imgName,idImage,urlImage)
     return (
     <>
         <div className="sectionAdd">
             <h1 className="title">Edit an anime</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit>
                 <div className="dataToModify">
                     <div className="formGroup">  
                         <label htmlFor="id">ID: </label>
@@ -121,7 +124,7 @@ export default function Edit(){
                     <div className="formGroup">
                         <label htmlFor="watchStatusInp">Watch status: </label>
                         <select value={watchStatus} name="Watch Status" id="watchStatusInp" onChange={handlewatchStatus} required>
-                            {options.map(({value,label})=>{return <option key={value} value={value}>{label}</option>})}
+                            {options.map(({value,label})=>{return <option id={id} key={value} value={value}>{label}</option>})}  
                         </select>
                     </div>
                     <div className="formGroup">
@@ -134,13 +137,13 @@ export default function Edit(){
                     </div>
                     <div className="formGroup">
                         <label htmlFor="imageModif">Img (optional): </label>
-                        <select value={imgName} name="image selection" id="imageModif" onChange={handleimageName} required>
-                            {images.map(({id,name,url})=>{return <option id={url} key={id} value={id}>{name}</option>})}
+                        <select value={idImage} name="image selection" id="imageModif" onChange={handleimageName} required>
+                            {images.map(({id,url,name})=>{return <option id={url} key={id} value={id}>{name}</option>})}
                         </select>
                     </div>
                     <div className="formGroup">
                         <label htmlFor="imageModif">Img selected: </label>
-                        <img src={urlImage || null} alt="N/A" />
+                        <img src={urlImage || null} alt={imgName} />
                     </div>
                 </div>
                 <div className="btns-edit-container">
