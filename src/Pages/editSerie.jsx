@@ -3,14 +3,14 @@ import { useState } from "react";
 
 export default function Edit(){
     const {id} = useParams()
-    const [title,setTitle] = useState()
-    const [seasons,setSeasons] = useState()
-    const [chapters,setChapters] = useState()
-    const [author,setAuthor] = useState()
-    const [watchStatus,setWatchStatus] = useState()
-    const [description,setDescription] = useState()
-    const [review,setReview] = useState()
-    const [imgSrc,setImgSrc] = useState()
+    const [title,setTitle] = useState("")
+    const [seasons,setSeasons] = useState("")
+    const [chapters,setChapters] = useState("")
+    const [author,setAuthor] = useState("")
+    const [watchStatus,setWatchStatus] = useState("")
+    const [description,setDescription] = useState("")
+    const [review,setReview] = useState("")
+    const [imgFile,setImgFile] = useState("")
 
     const handletitle = (event)=>{setTitle(event.target.value)}
     const handleseasons = (event)=>{setSeasons(event.target.value)}
@@ -19,7 +19,7 @@ export default function Edit(){
     const handlewatchStatus = (event)=>{setWatchStatus(event.target.value)}
     const handledescription = (event)=>{setDescription(event.target.value)}
     const handlereview = (event)=>{setReview(event.target.value)}
-    const handleimgSrc = (event)=>{setImgSrc(event.target.value)}
+    const handleimgFile = (event)=>{setImgFile(event.target.files[0])}
     
     const url_api=`http://localhost:3000/animes/series`
     
@@ -34,7 +34,6 @@ export default function Edit(){
         setWatchStatus(data[0].watch_status)
         setDescription(data[0].description || '')
         setReview(data[0].review || '')
-        setImgSrc('')
     }
     fetchData()
     const options = [{value: 'planned',label: 'planned'},{value: 'watching',label: 'watching'},{value: 'completed',label: 'completed'},{value: 'on_hold',label: 'on_hold'},{value: 'dropped',label: 'dropped'}]
@@ -44,12 +43,28 @@ export default function Edit(){
         const bodyData = {
             title: title, author: author,watch_status: watchStatus
         }
+        console.log("object file:",imgFile)
+        if (imgFile){
+            const formImg = new FormData()
+            const cloud_name = "dgak0vgg2"
+            const url_post = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`
+            const preset_name = "anime_images"
+            formImg.append("file",imgFile)
+            formImg.append("upload_preset",preset_name)
+            formImg.append("cloud_name",cloud_name)
+            const responseImg = await fetch(url_post,{method:"POST",body: formImg})
+            const uploadedImageUrl = await responseImg.json()
+            if (responseImg.ok){
+                bodyData["imgSrc"] = uploadedImageUrl.url
+                bodyData["filename"] = imgFile.name
+            }
+        }
+
         if (seasons){bodyData["seasons"] = seasons}
         if (chapters){bodyData["chapters"] = chapters}
         if (description){bodyData["description"] = description}
         if (review){bodyData["review"] = review}
-        if (imgSrc){bodyData["imgSrc"] = imgSrc}
-        
+
         console.log("datos submit:",bodyData,JSON.stringify(bodyData))
         const response = await fetch(`${url_api}/${id}`,{method:"PUT",  
             headers: {
@@ -102,7 +117,7 @@ export default function Edit(){
                     </div>
                     <div className="formGroup">
                         <label htmlFor="imageInp">Img (optional): </label>
-                        <input type="file" value={imgSrc} id="imageInp" accept="image/png, image/jpeg" onChange={handleimgSrc}/>
+                        <input type="file" value={imgFile.path} id="imageInp" accept="image/png, image/jpeg" onChange={handleimgFile}/>
                     </div>
                 </div>
                 <div className="btns-edit-container">

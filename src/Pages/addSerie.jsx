@@ -14,10 +14,8 @@ const handleSubmit = async (event) => {
 
     const dataInputs = Array.from(event.target.getElementsByTagName("input")) //htmlCollection of elements
     const dataSelect = event.target.getElementsByTagName("Select")
-    //console.log("data select: ", dataSelect[0].value)
-    //console.log(dataInputs)
-    /*const file_img = dataInputs[6].files[0]
-    console.log(file_img)
+    const file_img = dataInputs[6].files[0]
+    console.log("object file:",file_img)
     const formImg = new FormData()
     const cloud_name = "dgak0vgg2"
     const url_post = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`
@@ -25,20 +23,25 @@ const handleSubmit = async (event) => {
     formImg.append("file",file_img)
     formImg.append("upload_preset",preset_name)
     formImg.append("cloud_name",cloud_name)
-    const response = await fetch(url_post,{method:"POST",body: formImg})
-    const uploadedImageUrl = await response.json()
-        console.log(uploadedImageUrl) */
+    const responseImg = await fetch(url_post,{method:"POST",body: formImg})
+    const uploadedImageUrl = await responseImg.json()
 
-    const url_post_api=`http://localhost:3000/animes/series/`
+
     const bodyData = {
         title: dataInputs[0].value, author: dataInputs[3].value,watch_status: dataSelect[0].value
     }
+        const url_post_api=`http://localhost:3000/animes/series/`
+
+
     if (dataInputs[1].value.length){bodyData["seasons"] = dataInputs[1].value}
     if (dataInputs[2].value.length){bodyData["chapters"] = dataInputs[2].value}
     if (dataInputs[4].value.length){bodyData["description"] = dataInputs[4].value}
     if (dataInputs[5].value.length){bodyData["review"] = dataInputs[5].value}
-    if (dataInputs[6].files[0].name){bodyData["imgSrc"] = dataInputs[6].files[0].name}
-    
+    if (responseImg.ok && uploadedImageUrl.url && dataInputs[6]?.files[0]?.name){
+        bodyData["imgSrc"] = uploadedImageUrl.url
+        bodyData["filename"] = dataInputs[6].files[0].name
+    }     
+
     console.log(bodyData,JSON.stringify(bodyData))
     const response = await fetch(url_post_api,{method:"POST",  
         headers: {
@@ -47,7 +50,7 @@ const handleSubmit = async (event) => {
     ,body: JSON.stringify(bodyData)})
     const retorno = await response.json()
     console.log(response,retorno)
-
+    
 }
 
 export default function Edit(){
@@ -77,7 +80,7 @@ export default function Edit(){
                     <div className="formGroup">
                         <label htmlFor="watchStatusInp">Watch status: </label>
                         <select name="Watch Status" id="watchStatusInp" required>
-                            {options.map(({value,label})=>{return <option id={value} value={value}>{label}</option>})}
+                            {options.map(({value,label})=>{return <option key={value} value={value}>{label}</option>})}
                         </select>
                     </div>
                     <div className="formGroup">
