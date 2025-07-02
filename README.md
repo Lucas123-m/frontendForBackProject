@@ -19,5 +19,13 @@ En cada serie de anime hay 3 iconos:
 - icono azul para ver contenido de anime asociado a la serie. Hay tambien una opcion de agregar nuevo contenido, y cada contenido con la opcion de editarlo y borrarlo.
 - icono rojo para borrar la serie de anime (y todo su contenido asociado)
 
+## Instalacion
+
+```
+$ git clone https://github.com/Lucas123-m/frontendForBackProject.git
+$ npm install
+$ npm run dev
+```
+
 ## Tecnologías Usadas
 react con javascript: libreria para construir interfaces.
