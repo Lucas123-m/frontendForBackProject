@@ -1,12 +1,9 @@
-# React + Vite
+# Proyecto para backend: CRUD basico de animes.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este es un proyecto CRUD básico para gestionar datos de animes, como: titulo de serie, estado de visualizacion, autor, tipos de contenidos de anime para ver dentro de la "serie" (temporadas, ovas, peliculas, etc.), imagenes asociadas a la serie (no al contenido por ahora), orden para ver dichos contenidos, etc.
 
-Currently, two official plugins are available:
+## Descripción
+Este proyecto es un ejemplo de cómo implementar las operaciones CRUD utilizando react para el frontend con javascript y express con MySQL en el backend . El objetivo es mostrar cómo crear, leer, actualizar y eliminar registros en una base de datos.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tecnologías Usadas
+react con javascript: libreria para construir interfaces.
