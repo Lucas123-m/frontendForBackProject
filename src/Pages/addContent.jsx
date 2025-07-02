@@ -10,7 +10,7 @@ export default function AddContent(){
     const discardChanges = ()=> {
         const inputs = document.getElementsByTagName('input')
         for (let input of inputs){
-            if (input.id=="id"){continue}
+            if (input.id=="id_serie"){continue}
             input.value = ""
         }
         const selects = document.getElementsByTagName("select")
