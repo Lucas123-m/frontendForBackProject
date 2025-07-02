@@ -15,7 +15,6 @@ export default function AddImage(){
         const response = await fetch(url_post_api,{method:"POST",body: formData})
         const retorno = await response.json()
         console.log(response,retorno)
-        
     }
     return (
     <>
