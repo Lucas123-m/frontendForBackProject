@@ -32,8 +32,6 @@ export default function MainPage(){
             <main>
                 <div className="animes-buttons">
                     <button id="add-anime" className="btn btn-add"><NavLink to="/newEntry">New Anime</NavLink></button>
-                </div>
-                <div className="animes-buttons">
                     <button id="add-image" className="btn btn-add"><NavLink to="/newImage">New Image</NavLink></button>
                 </div>
                 <hr></hr>

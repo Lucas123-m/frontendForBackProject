@@ -42,12 +42,14 @@ export default function AnimeContent(){
                 </div>
             </div>
             <hr />         
-                <TableAnimeContent data={data} onDelete={onDelete}></TableAnimeContent>
-            <button type="button" className="btns-edit btn-go">
-                <NavLink to="/content/new/" state={{id: id}} className="go-back-link link">Add content</NavLink>
-            </button>
-            <button type="button" className="btns-edit btn-go">
-                <NavLink to="/" className="go-back-link link">Go back</NavLink>
-            </button>
+            <TableAnimeContent data={data} onDelete={onDelete}></TableAnimeContent>
+            <div>
+                <button type="button" className="btns-edit btn-go">
+                    <NavLink to="/content/new/" state={{id: id}} className="go-back-link link">Add content</NavLink>
+                </button>
+                <button type="button" className="btns-edit btn-go">
+                    <NavLink to="/" className="go-back-link link">Go back</NavLink>
+                </button>
+            </div>
         </main>
     </>)}

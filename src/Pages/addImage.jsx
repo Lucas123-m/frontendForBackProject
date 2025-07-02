@@ -4,7 +4,6 @@ const handleSubmit = async (event) => {
     event.preventDefault()
     const inputs = event.target.getElementsByTagName("input")
     const file_img = inputs[1].files[0]
-    console.log("object file:",file_img)
     const formImg = new FormData()
     const cloud_name = "dgak0vgg2"
     const url_post = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`
@@ -14,7 +13,6 @@ const handleSubmit = async (event) => {
     formImg.append("cloud_name",cloud_name)
     const responseImg = await fetch(url_post,{method:"POST",body: formImg})
     const uploadedImageUrl = await responseImg.json()
-    console.log(uploadedImageUrl)
 
     if (responseImg.ok) {
         const bodyData = {
@@ -22,7 +20,6 @@ const handleSubmit = async (event) => {
         }
         const url_post_api=`http://localhost:3000/animes/images/` 
 
-        console.log(bodyData,JSON.stringify(bodyData))
         const response = await fetch(url_post_api,{method:"POST",  
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8'

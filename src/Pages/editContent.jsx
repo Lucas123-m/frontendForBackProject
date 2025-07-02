@@ -31,7 +31,6 @@ export default function EditContent(){
         const fetchData = async()=>{
             const res = await fetch(`${url_api}/contents/${id}`);
             const data = await res.json();
-            console.log(data)
             setIdSerie(data[0].id_serie)
             setTitle(data[0].title_content)
             setType(data[0].type)
@@ -43,7 +42,6 @@ export default function EditContent(){
             setInitialID(data[0].id_serie)
         }
         fetchData()
-        console.log("fetch")
     },[])
 
     const options_watch_status = [{value: 'planned',label: 'planned'},{value: 'watching',label: 'watching'},{value: 'completed',label: 'completed'},{value: 'on_hold',label: 'on_hold'},{value: 'dropped',label: 'dropped'}]
@@ -59,7 +57,6 @@ export default function EditContent(){
         if (chapters){bodyData["chapters"] = chapters}
         if (review){bodyData["review"] = review}
         
-        console.log("datos submit:",bodyData,JSON.stringify(bodyData))
         const response = await fetch(`${url_api}/contents/${id}`,{method:"PUT",  
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8'
@@ -69,7 +66,6 @@ export default function EditContent(){
         console.log(response,retorno)
     
     }
-    console.log(watchStatus,type)
     return (
     <>
         <div className="sectionAdd">
