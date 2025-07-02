@@ -104,7 +104,7 @@ img {
   margin: 5px 5px 5px 10px;
 }
 
-.btn-anime,.btns-edit {
+.btn-anime,.btns-edit ,.btns-delete{
   width: 50px;
   height: 30px;
   font-size: 0.75em;
@@ -133,7 +133,7 @@ img {
   background: linear-gradient(0deg, rgb(3, 136, 25) 0%, rgb(47, 175, 21) 100%);
 }
 
-.btn-delete {
+.btn-delete{
   background: linear-gradient(0deg, rgb(88, 3, 3) 0%, rgb(95, 2, 2) 100%);
   position: absolute; 
   bottom: 20px;
@@ -141,6 +141,14 @@ img {
 }
 
 .btn-delete:hover {
+  background: linear-gradient(0deg, rgb(202, 4, 4) 0%, rgb(214, 6, 6) 100%);
+}
+
+.btn-delete-form{
+  background: linear-gradient(0deg, rgb(88, 3, 3) 0%, rgb(95, 2, 2) 100%);
+}
+
+.btn-delete-form:hover {
   background: linear-gradient(0deg, rgb(202, 4, 4) 0%, rgb(214, 6, 6) 100%);
 }
 
@@ -160,7 +168,7 @@ img {
   background: linear-gradient(0deg, rgb(0, 76, 255) 0%, rgb(0, 38, 255) 100%);
 }
 
-.btns-edit {
+.btns-edit, .btns-delete {
   margin-left: 1rem;
   margin-right: 1rem;
   color:white;

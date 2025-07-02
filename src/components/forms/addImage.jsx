@@ -1,40 +1,26 @@
 import { NavLink } from "react-router-dom";
 
-const handleSubmit = async (event) => {
-    event.preventDefault()
-    const inputs = event.target.getElementsByTagName("input")
-    const file_img = inputs[1].files[0]
-    const formImg = new FormData()
-    const cloud_name = "dgak0vgg2"
-    const url_post = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`
-    const preset_name = "anime_images"
-    formImg.append("file",file_img)
-    formImg.append("upload_preset",preset_name)
-    formImg.append("cloud_name",cloud_name)
-    const responseImg = await fetch(url_post,{method:"POST",body: formImg})
-    const uploadedImageUrl = await responseImg.json()
-
-    if (responseImg.ok) {
-        const bodyData = {
-            url: uploadedImageUrl.url, name: inputs[0].value
-        }
-        const url_post_api=`http://localhost:3000/animes/images/` 
-
-        const response = await fetch(url_post_api,{method:"POST",  
-            headers: {
-                'Content-Type': 'application/json; charset=UTF-8'
-            }
-        ,body: JSON.stringify(bodyData)})
+export default function AddImage(){
+    const handleSubmit = async (event) => {
+        event.preventDefault()
+        const inputs = event.target.getElementsByTagName("input")
+        const file = inputs[1].files[0]
+        
+        const formData = new FormData();
+        console.log("file antes de enviar: ",file)
+        formData.append("name",inputs[0].value)
+        formData.append("file",file)
+        
+        const url_post_api=`http://localhost:3000/animes/images` 
+        const response = await fetch(url_post_api,{method:"POST",body: formData})
         const retorno = await response.json()
         console.log(response,retorno)
+        
     }
-}
-
-export default function Edit(){
     return (
     <>
         <div className="sectionAdd">
-            <h1 className="title">Add an anime</h1>
+            <h1 className="title">Add an Image</h1>
             <form onSubmit={handleSubmit}>
                 <div className="dataToModify">
                     <div className="formGroup">
