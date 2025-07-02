@@ -18,7 +18,6 @@ export default function Edit(){
         const fetchImages= async()=>{
             const resImages = await fetch(`http://localhost:3000/animes/images/`);
             const dataImages = await resImages.json();
-            console.log("fetch images: ",dataImages)
             dataImages.push({id:0,name:"N/A",url: ""})
             setImages(dataImages)
         }
