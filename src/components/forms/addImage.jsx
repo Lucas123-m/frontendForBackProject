@@ -7,7 +7,6 @@ export default function AddImage(){
         const file = inputs[1].files[0]
         
         const formData = new FormData();
-        console.log("file antes de enviar: ",file)
         formData.append("name",inputs[0].value)
         formData.append("file",file)
         
