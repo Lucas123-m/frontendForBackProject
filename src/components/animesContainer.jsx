@@ -1,14 +1,6 @@
 import AnimeBox from './animeBox'
 
 function AnimesContainer ({animes, onDelete, images}){
-
-    //images.foreach((elem)=>console.log("elem en animes container: ",elem,"--",elem.id))
-    if (!images){
-        return <div>cargando...</div>
-    }
-    images.forEach(element => {
-        console.log(element)
-    });
     return (
         <div className="container" id="animes-container">
            {animes.map(({id, title, name, seasons,idImage})=>

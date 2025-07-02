@@ -14,35 +14,18 @@ const handleSubmit = async (event) => {
 
     const dataInputs = Array.from(event.target.getElementsByTagName("input")) //htmlCollection of elements
     const dataSelect = event.target.getElementsByTagName("Select")
-    const file_img = dataInputs[6].files[0]
-    console.log("object file:",file_img)
-    const formImg = new FormData()
-    const cloud_name = "dgak0vgg2"
-    const url_post = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`
-    const preset_name = "anime_images"
-    formImg.append("file",file_img)
-    formImg.append("upload_preset",preset_name)
-    formImg.append("cloud_name",cloud_name)
-    const responseImg = await fetch(url_post,{method:"POST",body: formImg})
-    const uploadedImageUrl = await responseImg.json()
 
-
-    const bodyData = {
+        const bodyData = {
         title: dataInputs[0].value, author: dataInputs[3].value,watch_status: dataSelect[0].value
     }
-        const url_post_api=`http://localhost:3000/animes/series/`
+    const url_post_api=`http://localhost:3000/animes/series/`
 
 
     if (dataInputs[1].value.length){bodyData["seasons"] = dataInputs[1].value}
     if (dataInputs[2].value.length){bodyData["chapters"] = dataInputs[2].value}
     if (dataInputs[4].value.length){bodyData["description"] = dataInputs[4].value}
-    if (dataInputs[5].value.length){bodyData["review"] = dataInputs[5].value}
-    if (responseImg.ok && uploadedImageUrl.url && dataInputs[6]?.files[0]?.name){
-        bodyData["imgSrc"] = uploadedImageUrl.url
-        bodyData["filename"] = dataInputs[6].files[0].name
-    }     
+    if (dataInputs[5].value.length){bodyData["review"] = dataInputs[5].value}  
 
-    console.log(bodyData,JSON.stringify(bodyData))
     const response = await fetch(url_post_api,{method:"POST",  
         headers: {
             'Content-Type': 'application/json; charset=UTF-8'

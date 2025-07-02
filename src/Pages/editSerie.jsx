@@ -27,7 +27,6 @@ export default function Edit(){
     const handlereview = (event)=>{setReview(event.target.value)}
 
     const handleimageName = (event)=>{
-        console.log(event.target.selectedOptions[0])
         setIdImage(parseInt(event.target.value))
         setImgName(event.target.selectedOptions[0].text)
         setUrlImage(event.target.selectedOptions[0].id)
@@ -36,40 +35,36 @@ export default function Edit(){
     const url_api=`http://localhost:3000/animes/series`
     useEffect(()=>{
         const fetchData = async()=>{
-            const res = await fetch(`${url_api}/${id}`);
-            const data = await res.json();
+            const resSerie = await fetch(`${url_api}/${id}`);
+            const dataSerie = await resSerie.json();
+            console.log("data serie: ",dataSerie,dataSerie[0].idImage)
+            setTitle(dataSerie[0].title)
+            setSeasons(dataSerie[0].seasons || '')
+            setChapters(dataSerie[0].chapters || '')
+            setAuthor(dataSerie[0].author)
+            setWatchStatus(dataSerie[0].watch_status)
+            setDescription(dataSerie[0].description || '')
+            setReview(dataSerie[0].review || '')
+            setIdImage(dataSerie[0].idImage || 0)
+
+            const resImages = await fetch(`http://localhost:3000/animes/images/`);
+            const dataImages = await resImages.json();
+            console.log("fetch images: ",dataImages,dataSerie[0].idImage)
     
-            setTitle(data[0].title)
-            setSeasons(data[0].seasons || '')
-            setChapters(data[0].chapters || '')
-            setAuthor(data[0].author)
-            setWatchStatus(data[0].watch_status)
-            setDescription(data[0].description || '')
-            setReview(data[0].review || '')
-            setIdImage(data[0].idImage || 0)
+            const dataImage = dataImages.filter((elem)=> 
+            {
+                console.log("dato:",elem.id,dataSerie[0].idImage,elem.id===dataSerie[0].idImage)
+                return elem.id === dataSerie[0].idImage
+            })
+            console.log("imagen fetch: ",dataImage)
+            setImgName(dataImage[0]?.name || "N/A")
+            setUrlImage(dataImage[0]?.url || "")
+
+            dataImages.push({id:0,name:"N/A",url: ""})
+            setImages(dataImages)
         }
         fetchData()
-    
-        const fetchImages = async()=>{
-            const res = await fetch(`http://localhost:3000/animes/images/`);
-            const data = await res.json();
-            console.log("id image: ",idImage)
-            if (idImage){        
-                const dataImage = data.filter((elem)=> elem.id === idImage)
-                setImgName(dataImage.name)
-                setUrlImage(dataImage.url)
-                console.log("estado inicial, HAY dato previo:",imgName,urlImage)
-
-            } else {
-                console.log("estado inicial, sin dato previo: ",imgName,"-",urlImage)
-            }
-            data.push({id:0,name:"N/A",url: ""})
-            setImages(data)
-        }
-        fetchImages()
-    },[])
-
-    
+    },[])   
 
     const options = [{value: 'planned',label: '1-planned'},{value: 'watching',label: '2-watching'},{value: 'completed',label: '3-completed'},{value: 'on_hold',label: '4-on_hold'},{value: 'dropped',label: '5-dropped'}]
     
@@ -94,8 +89,7 @@ export default function Edit(){
         console.log(retorno)  
         
     }
-
-    console.log("renderiza con: ",imgName,idImage,urlImage)
+    console.log("renderiza con: ",idImage,"-",urlImage)
     return (
     <>
         <div className="sectionAdd">
