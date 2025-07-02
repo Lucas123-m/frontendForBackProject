@@ -37,7 +37,6 @@ export default function Edit(){
         const fetchData = async()=>{
             const resSerie = await fetch(`${url_api}/${id}`);
             const dataSerie = await resSerie.json();
-            console.log("data serie: ",dataSerie,dataSerie[0].idImage)
             setTitle(dataSerie[0].title)
             setSeasons(dataSerie[0].seasons || '')
             setChapters(dataSerie[0].chapters || '')
@@ -49,14 +48,11 @@ export default function Edit(){
 
             const resImages = await fetch(`http://localhost:3000/animes/images/`);
             const dataImages = await resImages.json();
-            console.log("fetch images: ",dataImages,dataSerie[0].idImage)
     
             const dataImage = dataImages.filter((elem)=> 
             {
-                console.log("dato:",elem.id,dataSerie[0].idImage,elem.id===dataSerie[0].idImage)
                 return elem.id === dataSerie[0].idImage
             })
-            console.log("imagen fetch: ",dataImage)
             setImgName(dataImage[0]?.name || "N/A")
             setUrlImage(dataImage[0]?.url || "")
 
@@ -89,7 +85,6 @@ export default function Edit(){
         console.log(retorno)  
         
     }
-    console.log("renderiza con: ",idImage,"-",urlImage)
     return (
     <>
         <div className="sectionAdd">
