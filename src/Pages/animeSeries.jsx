@@ -32,7 +32,7 @@ export default function MainPage(){
             <main>
                 <div className="animes-buttons">
                     <button id="add-anime" className="btn btn-add"><NavLink to="/newEntry">New Anime</NavLink></button>
-                    <button id="add-image" className="btn btn-add"><NavLink to="/newImage">New Image</NavLink></button>
+                    <button id="add-image" className="btn btn-add"><NavLink to="/manageImages">Manage Images</NavLink></button>
                 </div>
                 <hr></hr>
                 <AnimesContainer animes={dataAnimes} onDelete={setDelete} images={dataImages}/>

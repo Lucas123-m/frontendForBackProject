@@ -5,17 +5,23 @@ export default function DeleteImage(){
     const [idImage,setIdImage] = useState(0)
     const [imgName,setImgName] = useState("N/A")
     const [images,setImages] = useState([])
+    const [deleted,setDeleted] = useState(false)
     useEffect(()=>{
         const getImages = async()=>{
             const res = await fetch("http://localhost:3000/animes/images")
             const data = await res.json()
             data.push({id:0,name:"N/A",url: ""})
             setImages(data)
-
+            setIdImage(0)
+            setUrlImage('')
+            setImgName("N/A")
+            const inputImg = document.getElementById("imageInp")
+            if(inputImg){inputImg.value=""}
             return data
         } 
         getImages()
-    },[])
+        setDeleted(false)
+    },[deleted])
 
     const handleimageName = (event)=>{
         setIdImage(parseInt(event.target.value))
@@ -29,6 +35,7 @@ export default function DeleteImage(){
         const res = await fetch(`http://localhost:3000/animes/images/${idImage}`,{method: "DELETE"})
         const data = await res.json() 
         console.log(data)
+        setDeleted(true)
     }
     return(
         <>

@@ -82,7 +82,7 @@ export default function UpdateImage(){
                     </div>
                 </div>
                 <div className="btns-edit-container">
-                    <button type="submit" className="btns-edit btn-confirm">Submit</button>
+                    <button type="submit" className="btns-edit btn-confirm">Confirm</button>
                     <button type="button" className="btns-edit btn-go">
                         <NavLink to="/" className="go-back-link link">Go back</NavLink>
                     </button>
