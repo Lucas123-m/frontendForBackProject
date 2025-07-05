@@ -1,6 +1,7 @@
 import { useState } from "react"
 import AddImage from "../components/forms/addImage"
 import DeleteImage from "../components/forms/deleteImage"
+import UpdateImage from "../components/forms/updateImage"
 export default function ManageImages(){
     const [action,setAction]=useState("add")
 
@@ -8,16 +9,19 @@ export default function ManageImages(){
         setAction(e.target.value)
     }
     const manage = ()=>{
-        const selectTag = document.getElementById("selectActionImg")
-            if (action === "add"){
-                return <AddImage></AddImage>
-            } else if (selectTag.value === "delete"){
-                return <DeleteImage></DeleteImage>
-            } else {
-                return <div><h1>Accion no encontrada</h1></div>
-            }
+        if (action === "add"){
+            return <AddImage></AddImage>
+        } else if (action === "delete"){
+            return <DeleteImage></DeleteImage>
+        } else if (action === "update"){
+            return <UpdateImage></UpdateImage>
+        } else {
+            return <div><h1>Accion no encontrada</h1></div>
         }
-    const options = [{value: "add",label: "Add an image"},{value: "delete",label: "Delete an image"}]
+    }
+    const options = [{value: "add",label: "Add an image"},{value: "delete",label: "Delete an image"},
+        {value:"update",label:"Update an image"}
+    ]
     return (
     <>
         <div>
