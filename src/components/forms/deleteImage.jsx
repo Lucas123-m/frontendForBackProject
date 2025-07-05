@@ -26,7 +26,6 @@ export default function DeleteImage(){
         setIdImage(parseInt(event.target.value))
         setImgName(event.target.selectedOptions[0].text)
         setUrlImage(event.target.selectedOptions[0].id)
-        console.log(idImage,imgName,urlImage)
     }
 
     const handleSubmit= async (event)=>{

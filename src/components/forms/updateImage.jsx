@@ -42,13 +42,10 @@ export default function UpdateImage(){
         if (inputImg.files.length){
             file = inputImg.files[0]
         }
-
-        console.log("datos front:", name,file,file.length)
         const formData = new FormData();
         formData.append("name",name)
         if (file) {formData.append("file",file)}
         
-        console.log("submitting:",formData)
         const url_post_api=`http://localhost:3000/animes/images` 
         const response = await fetch(`${url_post_api}/${idImage}`,{method:"PUT",body: formData})
         const retorno = await response.json()

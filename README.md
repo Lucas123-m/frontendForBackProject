@@ -10,8 +10,11 @@ Este proyecto es un ejemplo de cómo implementar las operaciones CRUD utilizando
 http://localhost:5173/ => pagina principal, se traen todas las series de animes.
 Inicialmente los animes no tienen imagen.
 
-Hay 2 botones para agregar datos: agregar una imagen y agregar un anime.
-- Agregar una imagen, se sube a cloudinary y luego se guarda en la bbdd mediante llamado a la api. 
+Hay 2 botones para agregar datos: Gestionar imagenes y agregar un anime.
+- Gestionar imagenes, hay 3 opciones: agregar, editar y borrar. 
+    - Agregar: Se sube a cloudinary y luego se guarda la url en la bbdd mediante llamado a la api. 
+    - Editar: Se puede cambiar el nombre de la imagen en la bbdd, cambiar la imagen subida a cloudinary o ambas. 
+    - Borrar: Se borra la imagen de cloudinary y de la bbdd.
 - agregar una serie de anime, se puede relacionarle una imagen o editarlo despues de crearlo.
 
 En cada serie de anime hay 3 iconos:
