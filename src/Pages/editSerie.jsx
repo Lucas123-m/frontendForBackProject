@@ -55,8 +55,6 @@ export default function Edit(){
             })
             setImgName(dataImage[0]?.name || "N/A")
             setUrlImage(dataImage[0]?.url || "")
-
-            dataImages.push({id:0,name:"N/A",url: ""})
             setImages(dataImages)
         }
         fetchData()

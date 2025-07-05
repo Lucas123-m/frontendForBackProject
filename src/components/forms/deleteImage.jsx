@@ -10,7 +10,6 @@ export default function DeleteImage(){
         const getImages = async()=>{
             const res = await fetch("http://localhost:3000/animes/images")
             const data = await res.json()
-            data.push({id:0,name:"N/A",url: ""})
             setImages(data)
             setIdImage(0)
             setUrlImage('')
