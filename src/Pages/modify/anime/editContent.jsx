@@ -214,10 +214,10 @@ export default function EditContent() {
                         </div>
                     </div>
                     <div className="btns-edit-container">
-                        <button type="submit" className="btns-edit-form btn-confirm">
+                        <button type="submit" className="btn-edit-form btn-confirm">
                             Confirm
                         </button>
-                        <button type="button" className="btns-edit-form btn-go">
+                        <button type="button" className="btn-edit-form btn-go">
                             <NavLink
                                 to={`/content/${initialID}`}
                                 className="go-back-link link"

@@ -1,5 +1,7 @@
 import "./tableContent.css"
 import { NavLink } from 'react-router-dom';
+import DeleteIcon from '@mui/icons-material/Delete'; 
+import EditIcon from '@mui/icons-material/Edit';
 
 export default function TableAnimeContent({data,onDelete}) {
     const deleteContent = async(id)=>{
@@ -35,13 +37,17 @@ export default function TableAnimeContent({data,onDelete}) {
                             <td>{review}</td>
                             <td>{duration}</td>
                             <td>
-                                <button >                
-                                    <NavLink to={`/content/edit/${id}`} className="edit link">
-                                        Edit
+                                <button className="btn-edit-table">                
+                                    <NavLink to={`/content/edit/${id}`}>
+                                        <EditIcon sx={{ fontSize: 15 }}></EditIcon>
                                     </NavLink>
                                 </button>
                             </td>
-                            <td><button onClick={()=>{deleteContent(id)}}>Delete</button></td>
+                            <td>
+                                <button onClick={()=>{deleteContent(id)}} className="btn-delete-table">
+                                    <DeleteIcon sx={{ fontSize: 15 }}></DeleteIcon>
+                                </button>
+                            </td>
                         </tr>
                     )} 
                 </tbody>
