@@ -1,5 +1,5 @@
-import AnimeBox from './animeBox'
-
+import AnimeBox from '../animeBox'
+import './animesContainer.css'
 function AnimesContainer ({animes, onDelete, images}){
     return (
         <div className="container" id="animes-container">

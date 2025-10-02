@@ -1,12 +1,12 @@
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import MainPage from './Pages/animeSeries.jsx'
-import ManageImages from './Pages/manageImages.jsx'
-import Edit from './Pages/editSerie.jsx'
-import NewEntry from './Pages/addSerie.jsx'
-import AddContent from './Pages/addContent.jsx'
-import AnimeContent from './Pages/animeContent.jsx'
-import EditContent from './Pages/editContent.jsx'
+import MainPage from './Pages/show/animeSeries.jsx'
+import ManageImages from './Pages/modify/images/manageImages.jsx'
+import Edit from './Pages/modify/anime/editSerie.jsx'
+import NewEntry from './Pages/modify/anime/addSerie.jsx'
+import AddContent from './Pages/modify/anime/addContent.jsx'
+import AnimeContent from './Pages/show/animeContent.jsx'
+import EditContent from './Pages/modify/anime/editContent.jsx'
 
 export default function App(){
   return (

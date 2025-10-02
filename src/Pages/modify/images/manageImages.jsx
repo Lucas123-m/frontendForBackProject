@@ -1,7 +1,7 @@
 import { useState } from "react"
-import AddImage from "../components/forms/addImage"
-import DeleteImage from "../components/forms/deleteImage"
-import UpdateImage from "../components/forms/updateImage"
+import AddImage from "./addImage"
+import DeleteImage from "./deleteImage"
+import UpdateImage from "./updateImage"
 export default function ManageImages(){
     const [action,setAction]=useState("add")
 

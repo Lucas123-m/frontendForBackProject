@@ -1,4 +1,7 @@
-import AnimesContainer from "../components/animesContainer"
+import './animeSeries.css'
+import '../modify/btns.css'
+import '../modify/formElements.css'
+import AnimesContainer from "../../components/container/animesContainer"
 import { NavLink } from "react-router-dom"
 import { useState, useEffect } from "react"
 

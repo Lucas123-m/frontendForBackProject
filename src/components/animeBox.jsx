@@ -1,3 +1,4 @@
+import './animeBox.css'
 import { NavLink } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete'; 
 import EditIcon from '@mui/icons-material/Edit';
@@ -16,17 +17,17 @@ export default function AnimeBox({imgSrc, title, alt, seasons,id,onDelete}){
             <img src={imgSrc} alt={alt}></img>
             <p className="anime-title">Title: {title}.</p>
             <p className="n-seasons">Seasons: {seasons}.</p>
-            <button type="button" className="btn-anime btn-edit">
+            <button type="button" className="btn-anime-box btn-edit">
                 <NavLink to={`/edit/${id}`} className="edit link">
                     <EditIcon sx={{ fontSize: 20 }}></EditIcon>
                 </NavLink>
             </button>
-            <button type="button" className="btn-anime btn-see">
+            <button type="button" className="btn-anime-box btn-see">
                 <NavLink to={`/content/${id}`} className="edit link">
                     <ReadMoreIcon sx={{ fontSize: 20 }}></ReadMoreIcon>
                 </NavLink>
             </button>
-            <button type="button" className="btn-anime btn-delete" onClick={()=> 
+            <button type="button" className="btn-anime-box btn-delete" onClick={()=> 
                 {
                     deleteAnime(id);
                 }          

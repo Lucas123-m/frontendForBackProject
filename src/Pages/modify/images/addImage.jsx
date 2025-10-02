@@ -35,8 +35,8 @@ export default function AddImage(){
                     </div>
                 </div>
                 <div className="btns-edit-container">
-                    <button type="submit" className="btns-edit btn-confirm">Submit</button>
-                    <button type="button" className="btns-edit btn-go">
+                    <button type="submit" className="btn-edit-form btn-confirm">Submit</button>
+                    <button type="button" className="btn-edit-form btn-go">
                         <NavLink to="/" className="go-back-link link">Go back</NavLink>
                     </button>
                 </div>

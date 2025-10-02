@@ -1,0 +1,38 @@
+.animes-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn {
+    width: 130px;
+    height: 40px;
+    color: var(--platinum);
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-add {
+    background: linear-gradient(0deg, rgb(9, 97, 14) 0%, rgb(19, 112, 7) 100%);
+}
+
+.btn-add:hover {
+    background: linear-gradient(0deg, rgb(3, 136, 25) 0%, rgb(37, 218, 1) 100%);
+}
+
+hr {
+    margin: 30px;
+    visibility: hidden;
+}
+img {
+    display: block;
+    margin: 10px auto;
+    width: 90%;
+    height: 50%;
+}
+  
+  
+  

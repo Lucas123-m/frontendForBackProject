@@ -1,0 +1,68 @@
+.anime-box {
+    border: 3px solid var(--pomp-and-power);
+    background-color: var(--periwinkle);
+    width: 250px;
+    height: 350px;
+    text-align: left;
+    position: relative;
+}
+
+.anime-box > p {
+    margin: 5px 5px 5px 10px;
+}
+
+.btn-anime-box,.btns-delete{
+width: 50px;
+height: 30px;
+font-size: 0.75em;
+border: none;
+color: var(--platinum);  
+}
+
+.btn-anime-box > a, .btns-edit > a {
+color:white;
+text-decoration: none;
+}
+
+.btn-edit {
+position: absolute; 
+bottom: 20px;
+left:10%;
+font-style:normal;
+text-align: center;
+}
+
+.btn-edit {
+background: linear-gradient(0deg, rgb(9, 97, 14) 0%, rgb(19, 112, 7) 100%);
+}
+
+.btn-edit:hover, .btn-see:hover {
+background: linear-gradient(0deg, rgb(3, 136, 25) 0%, rgb(47, 175, 21) 100%);
+}
+  
+.btn-delete{
+    background: linear-gradient(0deg, rgb(88, 3, 3) 0%, rgb(95, 2, 2) 100%);
+    position: absolute; 
+    bottom: 20px;
+    right: 10%;
+}
+  
+.btn-delete:hover {
+    background: linear-gradient(0deg, rgb(202, 4, 4) 0%, rgb(214, 6, 6) 100%);
+}
+  
+.btn-see {
+position: absolute; 
+bottom: 20px;
+left:40%;
+font-style:normal;
+text-align: center;
+}
+
+.btn-see {
+background: linear-gradient(0deg, rgb(41, 4, 221) 0%, rgb(4, 0, 255) 100%);
+}
+
+.btn-see:hover, .btn-see:hover {
+background: linear-gradient(0deg, rgb(0, 76, 255) 0%, rgb(0, 38, 255) 100%);
+}

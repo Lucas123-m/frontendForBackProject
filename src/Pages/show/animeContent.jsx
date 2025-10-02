@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import TableAnimeContent from "../components/tableContent"
+import TableAnimeContent from "../../components/container/tableContent"
 import { NavLink,useParams } from "react-router-dom"
 
 export default function AnimeContent(){
@@ -44,10 +44,10 @@ export default function AnimeContent(){
             <hr />         
             <TableAnimeContent data={data} onDelete={onDelete}></TableAnimeContent>
             <div>
-                <button type="button" className="btns-edit btn-go">
+                <button type="button" className="btn-edit-form btn-go">
                     <NavLink to="/content/new/" state={{id: id}} className="go-back-link link">Add content</NavLink>
                 </button>
-                <button type="button" className="btns-edit btn-go">
+                <button type="button" className="btn-edit-form btn-go">
                     <NavLink to="/" className="go-back-link link">Go back</NavLink>
                 </button>
             </div>

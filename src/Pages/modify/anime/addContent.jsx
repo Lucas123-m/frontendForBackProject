@@ -85,9 +85,9 @@ export default function AddContent(){
                     </div>
                 </div>
                 <div className="btns-edit-container">
-                    <button type="submit" className="btns-edit btn-confirm">Confirm</button>
-                    <button type="button" className="btns-edit btn-discard" onClick={discardChanges}>Discard</button>
-                    <button type="button" className="btns-edit btn-go">
+                    <button type="submit" className="btns-edit-form btn-confirm">Confirm</button>
+                    <button type="button" className="btns-edit-form btn-discard" onClick={discardChanges}>Discard</button>
+                    <button type="button" className="btns-edit-form btn-go">
                         <NavLink to={`/content/${id}`} className="go-back-link link">Go back</NavLink>
                     </button>
                 </div>
