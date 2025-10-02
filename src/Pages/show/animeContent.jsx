@@ -1,12 +1,17 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import TableAnimeContent from "../../components/container/tableContent"
 import { NavLink,useParams } from "react-router-dom"
+import aob_ost from '../../../dist/assets/aob_ost.mp3'
+import bocchi_ost from '../../../dist/assets/bocchi_ost.mp3'
 
 export default function AnimeContent(){
     const { id } = useParams()
     const [title,setTitle] = useState("")
     const [data,setData] = useState([])
     const [deleted,setDelete] = useState(false)
+    const music = [{src: bocchi_ost,id:"1"},{src:aob_ost,id:"2"}]
+    var audio = useRef()
+    //new Audio(music.filter((music_obj)=>music_obj.id===id)[0].src)
     useEffect(()=>{
         const fetchTitle = async()=>{
             const res = await fetch(`http://localhost:3000/animes/series/${id}`);
@@ -22,7 +27,16 @@ export default function AnimeContent(){
         fetchTitle()
         fetchData()
         setDelete(false)
+        audio.current = new Audio(music.filter((music_obj)=>music_obj.id===id)[0].src)
+        audio.current.play()
     },[deleted])
+
+    useEffect(() => {
+        //https://stackoverflow.com/questions/54114171/how-to-play-an-mp3-once-onclick-in-react
+        return () => {
+            audio.current.pause()
+        }
+    }, [])
     const onDelete = async ()=>{
         setDelete(true)
     }
