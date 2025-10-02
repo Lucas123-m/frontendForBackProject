@@ -26,7 +26,7 @@ background: linear-gradient(0deg, rgb(202, 4, 4) 0%, rgb(214, 6, 6) 100%);
   margin-left: 1rem;
   margin-right: 1rem;
   color:white;
-  font-size: 1.15rem;
+  font-size: 1rem;
   width: 100px;
   height: 50px;
   font-weight: bold;
@@ -40,5 +40,6 @@ background: linear-gradient(0deg, rgb(202, 4, 4) 0%, rgb(214, 6, 6) 100%);
 }
 
 .btn-go {
+  margin-top: 10px;
   background: linear-gradient(0deg, rgb(28, 42, 235) 0%, rgba(12,25,180,1) 100%);
 }
