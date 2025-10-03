@@ -9,9 +9,13 @@ export default function AnimeContent(){
     const [title,setTitle] = useState("")
     const [data,setData] = useState([])
     const [deleted,setDelete] = useState(false)
-    const music = [{src: bocchi_ost,id:"1"},{src:aob_ost,id:"2"}]
-    var audio = useRef()
-    //new Audio(music.filter((music_obj)=>music_obj.id===id)[0].src)
+
+    const audio = useRef(null) //esto no funciona con useState porque es ASINCRONO. Entonces, audio.play() sucede aun sin estar seteado audio al montarse el componente.
+    //useRef se inicializa al montarse y despues se puede mutar sin generar re-renderizar!
+    //ademas, se mantiene el valor al re-renderizar tambien! Es persistente.
+    //una variable con var / let se redefine con cada renderizado.
+    //useState permite modificar PERO genera un renderizado siempre. Y ademas, no es sincrono.
+    
     useEffect(()=>{
         const fetchTitle = async()=>{
             const res = await fetch(`http://localhost:3000/animes/series/${id}`);
@@ -27,12 +31,20 @@ export default function AnimeContent(){
         fetchTitle()
         fetchData()
         setDelete(false)
-        audio.current = new Audio(music.filter((music_obj)=>music_obj.id===id)[0].src)
-        audio.current.play()
+
     },[deleted])
 
     useEffect(() => {
         //https://stackoverflow.com/questions/54114171/how-to-play-an-mp3-once-onclick-in-react
+        /*setAudio(new Audio(bocchi_ost))
+        if (audio){
+            audio.play()
+        }*/
+        const music = [{src: bocchi_ost,id:"1"},{src:aob_ost,id:"2"}]
+        audio.current = new Audio(music.filter((music_obj)=>music_obj.id===id)[0].src)
+        audio.current.play() // esto es SINCRONO. Se define audio.current y despues se le da play.
+        //como es un useEffect con [], solo se ejecuta al montarse inicialmente, no se ejecutar al re-renderizar-
+        //despues, se pausa al desmontarse el componente, es decir, salir de la seccion!
         return () => {
             audio.current.pause()
         }
