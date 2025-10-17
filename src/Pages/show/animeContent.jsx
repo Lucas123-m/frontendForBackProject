@@ -1,8 +1,8 @@
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState } from "react"
 import TableAnimeContent from "../../components/container/tableContent"
 import { NavLink,useParams } from "react-router-dom"
-import aob_ost from '../../../dist/assets/aob_ost.mp3'
-import bocchi_ost from '../../../dist/assets/bocchi_ost.mp3'
+//import aob_ost from '../../../dist/assets/aob_ost.mp3'
+//import bocchi_ost from '../../../dist/assets/bocchi_ost.mp3'
 
 export default function AnimeContent(){
     const { id } = useParams()
@@ -10,7 +10,7 @@ export default function AnimeContent(){
     const [data,setData] = useState([])
     const [deleted,setDelete] = useState(false)
 
-    const audio = useRef(null) //esto no funciona con useState porque es ASINCRONO. Entonces, audio.play() sucede aun sin estar seteado audio al montarse el componente.
+    //const audio = useRef(null) //esto no funciona con useState porque es ASINCRONO. Entonces, audio.play() sucede aun sin estar seteado audio al montarse el componente.
     //useRef se inicializa al montarse y despues se puede mutar sin generar re-renderizar!
     //ademas, se mantiene el valor al re-renderizar tambien! Es persistente.
     //una variable con var / let se redefine con cada renderizado.
@@ -34,13 +34,13 @@ export default function AnimeContent(){
 
     },[deleted])
 
-    useEffect(() => {
+    /*useEffect(() => {
         //https://stackoverflow.com/questions/54114171/how-to-play-an-mp3-once-onclick-in-react
         /*setAudio(new Audio(bocchi_ost))
         if (audio){
             audio.play()
         }*/
-        const music = [{src: bocchi_ost,id:"1"},{src:aob_ost,id:"2"}]
+        /*const music = [{src: bocchi_ost,id:"1"},{src:aob_ost,id:"2"}]
         audio.current = new Audio(music.filter((music_obj)=>music_obj.id===id)[0].src)
         audio.current.play() // esto es SINCRONO. Se define audio.current y despues se le da play.
         //como es un useEffect con [], solo se ejecuta al montarse inicialmente, no se ejecutar al re-renderizar-
@@ -48,7 +48,7 @@ export default function AnimeContent(){
         return () => {
             audio.current.pause()
         }
-    }, [])
+    }, [])*/
     const onDelete = async ()=>{
         setDelete(true)
     }
