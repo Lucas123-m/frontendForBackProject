@@ -1,8 +1,8 @@
 import { useState,useEffect } from "react"
-
+import './login.css'
 export default function Login(){
     const [dataCookie,setDataCookie] = useState("")
-   
+    const BASE_URL_API = "http://localhost:3000"
     useEffect(()=>{
         const fetchCookie = async()=>{
             await fetch("http://localhost:3000/users/cookie",{
@@ -14,67 +14,28 @@ export default function Login(){
             }).then(
                 res => setDataCookie(res["cookie"]["username"])
             ).catch(error => {console.error('Error:', error)
-                setDataCookie("N/A")
+                setDataCookie("")
             });
         }
         fetchCookie()
     },[])
-   /*return (
-    <>
-    <div class="container">
-    {if (typeof username !== 'undefined' && username)}
-        <div class="form-container">
-            <h2>Hola <% username %>! </h2>
-            <p>Estas en el panel de administracion</p>
-            <button id="close-session">Cerrar sesion</button>
-        </div>
-    <% } else { %>
-        <div class="form-container">
-            <form id="login-form">
-                <h2>Login</h2>
-                <label for="login-username">Username</label>
-                <input type="text" name="username" id="login-username" required>
-                <label for="login-password">Username</label>
-                <input type="text" name="password" id="login-password" required>
 
-                <button type="submit">Login</button>
-                <span>&nbsp;</span>
-            </form>
-        </div>
-        <div class="form-container">
-            <form id="register-form">
-                <h2>Register</h2>
-                <label for="register-username">Username</label>
-                <input type="text" name="username" id="register-username" required>
+    useEffect(()=>{
+        const $ = el =>document.querySelector(el)
+        const loginForm = $('#login-form')
+        const loginSpan = $('#login-form span')
 
-                <label for="register-password">Username</label>
-                <input type="text" name="password" id="register-password" required>
+        const registerForm = $('#register-form')
+        const registerSpan = $('#register-form span')
 
-                <label for="register-confirm-password">Username</label>
-                <input type="text" name="confirm-password" id="register-confirm-password" required>
-                <button type="submit">Login</button>
-                <span>&nbsp;</span>
-            </form>
-        </div>
-        <% } %>
-    </div>
-    <script>
-            console.log("Aca llega al menos")
-            const $ = el =>document.querySelector(el)
-            const loginForm = $('#login-form')
-            const loginSpan = $('#login-form span')
+        const logoutButton = $('#close-session')
 
-            const registerForm = $('#register-form')
-            const registerSpan = $('#register-form span')
-
-            const logoutButton = $('#close-session')
-
-            loginForm?.addEventListener('submit', e=>{
+        loginForm?.addEventListener('submit', e=>{
             e.preventDefault()
             const username = $('#login-username')
             const password = $('#login-password')
 
-            fetch('/users/login',{
+            fetch(`${BASE_URL_API}/users/login`,{
                 method: 'POST',
                 headers: {'Content-Type':'Application/json'},
                 body: JSON.stringify({username: username.value,password: password.value})
@@ -83,7 +44,7 @@ export default function Login(){
                     loginSpan.innerText = "Session iniciada, entrando..."
                     loginSpan.style.color = "green"
                     setTimeout(()=>{
-                        window.location.href = "/users/protected"
+                        window.location.href = "/main"
                     },2000)
                 } else {
                     loginSpan.innerText = "Error al iniciar sesion."
@@ -102,7 +63,7 @@ export default function Login(){
                 return
             }
 
-            fetch('/users/register',{
+            fetch(`${BASE_URL_API}/users/register`,{
                 method: 'POST',
                 headers: {'Content-Type':'Application/json'},
                 body: JSON.stringify({username: username.value,password: password.value})
@@ -111,7 +72,7 @@ export default function Login(){
                     registerSpan.innerText = "Usuario registrado, entrando..."
                     registerSpan.style.color = "green"
                     setTimeout(()=>{
-                        window.location.href = "/users/protected"
+                        window.location.href = "/main"
                     },2000)
                 } else {
                     registerSpan.innerText = "Error al registrar usuario."
@@ -121,7 +82,7 @@ export default function Login(){
         })
         logoutButton?.addEventListener('click',e => {
             e.preventDefault()
-            fetch('/users/logout',{
+            fetch(`${BASE_URL_API}/users/logout`,{
                 method:'POST',
                 headers: {'Content-Type':'Application/json'}
             }).then(res => {
@@ -130,9 +91,48 @@ export default function Login(){
                         window.location.href = "/"
                 },1000)
             })
-        })
-    </script>
+        })        
+    },[])
+    return (
+    <>
+        {dataCookie ? ( 
+            <div class="form-container">
+                <h2>Hola {dataCookie} </h2>
+                <p>Estas en el panel de administracion</p>
+                <button id="close-session">Cerrar sesion</button>
+            </div>
+        ) : (
+            <>
+            <div class="form-container">
+                <form id="login-form">
+                    <h2>Login</h2>
+                    <label for="login-username">Username</label>
+                    <input type="text" name="username" id="login-username" required />
+                    <label for="login-password">Username</label>
+                    <input type="text" name="password" id="login-password" required />
+
+                    <button type="submit">Login</button>
+                    <span>&nbsp;</span>
+                </form>
+            </div>
+            <div class="form-container">
+                <form id="register-form">
+                    <h2>Register</h2>
+                    <label for="register-username">Username</label>
+                    <input type="text" name="username" id="register-username" required />
+
+                    <label for="register-password">Username</label>
+                    <input type="text" name="password" id="register-password" required />
+
+                    <label for="register-confirm-password">Username</label>
+                    <input type="text" name="confirm-password" id="register-confirm-password" required />
+                    <button type="submit">Login</button>
+                    <span>&nbsp;</span>
+                </form>
+            </div>
+            </>
+        )}
+
     </>
-   )*/ 
-  return (<h1>Hola {dataCookie}</h1>)
+    )
 }
