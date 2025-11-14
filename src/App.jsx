@@ -1,5 +1,6 @@
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Login from './Pages/auth/login.jsx'
 import MainPage from './Pages/show/animeSeries.jsx'
 import ManageImages from './Pages/modify/images/manageImages.jsx'
 import Edit from './Pages/modify/anime/editSerie.jsx'
@@ -13,7 +14,8 @@ export default function App(){
     <>
       <BrowserRouter>
         <Routes>
-          <Route exact path="/" element={<MainPage/>} />
+          <Route exact path="/" element={<Login/>} />
+          <Route exact path="/main" element={<MainPage/>} />
           <Route exact path="/manageImages" element={<ManageImages/>} />
           <Route exact path="/edit/:id" element={<Edit/>} />
           <Route exact path="/newEntry" element={<NewEntry/>} />
