@@ -8,14 +8,18 @@ export default function Login(){
             await fetch("http://localhost:3000/users/cookie",{
                 method: 'GET',
                 credentials: 'include'
-            }).then(res => {
-                if(!res.ok){throw new Error(`HTTP Error in request, status: ${res.status}`)}
-                return res.json()
-            }).then(
-                res => setDataCookie(res["cookie"]["username"])
-            ).catch(error => {console.error('Error:', error)
-                setDataCookie("")
-            });
+            }).then(async res => {
+                if(!res.ok){
+                    setDataCookie("")
+                } else {
+                    res = await res.json()
+                    setDataCookie(res["cookie"]["username"])
+                }
+            }).catch((error)=>{
+                // This catches true network errors (server unreachable, etc.)
+                console.error('Network or Parsing Error:', error); 
+                setDataCookie("");
+            })
         }
         fetchCookie()
     },[])
@@ -26,7 +30,7 @@ export default function Login(){
         const loginSpan = $('#login-form span')
         const username = $('#login-username')
         const password = $('#login-password')
-        console.log("Se activa login event")
+
         fetch(`${BASE_URL_API}/users/login`,{
             method: 'POST',
             headers: {'Content-Type':'Application/json'},
@@ -86,8 +90,7 @@ export default function Login(){
             method:'POST',
             headers: {'Content-Type':'Application/json'},
             credentials: 'include', 
-        }).then(res => {
-            console.log("respuesta:",res)
+        }).then(() => {
             setTimeout(()=>{
                     window.location.href = "/"
             },1000)
