@@ -29,7 +29,7 @@ export default function Login(){
         const registerSpan = $('#register-form span')
 
         const logoutButton = $('#close-session')
-        //console.log(logoutButton,loginForm,registerForm)
+
         loginForm?.addEventListener('submit', e=>{
             e.preventDefault()
             const username = $('#login-username')
