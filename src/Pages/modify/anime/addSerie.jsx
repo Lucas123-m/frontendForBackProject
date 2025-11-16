@@ -53,7 +53,7 @@ export default function Edit(){
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8'
             }
-        ,body: JSON.stringify(bodyData)})
+        ,body: JSON.stringify(bodyData),credentials: "include"})
         const retorno = await response.json()
         console.log(response,retorno)    
     }

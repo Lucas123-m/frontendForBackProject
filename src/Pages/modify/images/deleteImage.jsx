@@ -31,7 +31,7 @@ export default function DeleteImage(){
 
     const handleSubmit= async (event)=>{
         event.preventDefault()
-        const res = await fetch(`http://localhost:3000/animes/images/${idImage}`,{method: "DELETE"})
+        const res = await fetch(`http://localhost:3000/animes/images/${idImage}`,{method: "DELETE",credentials: "include"})
         const data = await res.json() 
         console.log(data)
         setDeleted(true)

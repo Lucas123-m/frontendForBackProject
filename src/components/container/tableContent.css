@@ -1,7 +1,8 @@
-table, th, td {
-    border: 1px solid;
+.tableAnimeContent, .tableAnimeContent th, .tableAnimeContent td {
+    border: 1px solid black;
+    color: black;
 }
-table {
+.tableAnimeContent {
     width: 80%;
     margin: 20px auto;
 }

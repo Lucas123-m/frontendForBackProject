@@ -11,7 +11,7 @@ export default function AddImage(){
         formData.append("file",file)
         
         const url_post_api=`http://localhost:3000/animes/images` 
-        const response = await fetch(url_post_api,{method:"POST",body: formData})
+        const response = await fetch(url_post_api,{method:"POST",body: formData,credentials: "include"})
         const retorno = await response.json()
         console.log(response,retorno)
         const inputImg = document.getElementById("imageInp")

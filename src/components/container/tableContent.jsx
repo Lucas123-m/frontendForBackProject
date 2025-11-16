@@ -6,7 +6,7 @@ import EditIcon from '@mui/icons-material/Edit';
 export default function TableAnimeContent({data,onDelete}) {
     const deleteContent = async(id)=>{
         const url_api = `http://localhost:3000/animes/series`
-        const response = await fetch(`${url_api}/contents/${id}`,{method: "DELETE"})
+        const response = await fetch(`${url_api}/contents/${id}`,{method: "DELETE",credentials: "include"})
         const data = await response.json()
         console.log(data)
         onDelete()
