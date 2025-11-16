@@ -46,6 +46,9 @@ export default function Login(){
             } else {
                 loginSpan.innerText = "Error al iniciar sesion."
                 loginSpan.style.color = "red"
+                setTimeout(()=>{
+                    loginSpan.innerText=""
+                },3000)
             }
         })
     }
@@ -71,6 +74,7 @@ export default function Login(){
             if (res.ok){
                 registerSpan.innerText = "Usuario registrado, favor de logear."
                 registerSpan.style.color = "green"
+                
                 setTimeout(()=>{
                     registerSpan.innerText=""
                 },3000)
@@ -116,7 +120,7 @@ export default function Login(){
                     <label htmlFor="login-username">Username</label>
                     <input type="text" name="username" id="login-username" required />
                     <label htmlFor="login-password">Password</label>
-                    <input type="text" name="password" id="login-password" required />
+                    <input type="password" name="password" id="login-password" required />
 
                     <button type="submit">Login</button>
                     <span>&nbsp;</span>
@@ -129,10 +133,10 @@ export default function Login(){
                     <input type="text" name="username" id="register-username" required />
 
                     <label htmlFor="register-password">Password</label>
-                    <input type="text" name="password" id="register-password" required />
+                    <input type="password" name="password" id="register-password" required />
 
                     <label htmlFor="register-confirm-password">Confirm Password</label>
-                    <input type="text" name="confirm-password" id="register-confirm-password" required />
+                    <input type="password" name="confirm-password" id="register-confirm-password" required />
                     <button type="submit">Login</button>
                     <span>&nbsp;</span>
                 </form>
