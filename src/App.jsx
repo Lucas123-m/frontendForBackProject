@@ -14,8 +14,8 @@ export default function App(){
     <>
       <BrowserRouter>
         <Routes>
-          <Route exact path="/" element={<Login/>} />
-          <Route exact path="/main" element={<MainPage/>} />
+          <Route exact path="/" element={<MainPage/>} />
+          <Route exact path="/login" element={<Login/>} />
           <Route exact path="/manageImages" element={<ManageImages/>} />
           <Route exact path="/edit/:id" element={<Edit/>} />
           <Route exact path="/newEntry" element={<NewEntry/>} />

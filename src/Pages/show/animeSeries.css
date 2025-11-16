@@ -23,6 +23,14 @@
     background: linear-gradient(0deg, rgb(3, 136, 25) 0%, rgb(37, 218, 1) 100%);
 }
 
+.btn-login {
+    background: linear-gradient(0deg, #061fb1 0%, rgb(6, 17, 168) 100%);
+}
+
+.btn-login:hover {
+    background: linear-gradient(0deg, rgb(7, 105, 197) 0%, rgb(9, 98, 231) 100%);
+}
+
 hr {
     margin: 30px;
     visibility: hidden;

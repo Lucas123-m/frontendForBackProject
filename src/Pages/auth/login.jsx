@@ -41,7 +41,7 @@ export default function Login(){
                 loginSpan.innerText = "Session iniciada, entrando..."
                 loginSpan.style.color = "green"
                 setTimeout(()=>{
-                    window.location.href = "/main"
+                    window.location.href = "/"
                 },2000)
             } else {
                 loginSpan.innerText = "Error al iniciar sesion."
@@ -96,7 +96,7 @@ export default function Login(){
             credentials: 'include', 
         }).then(() => {
             setTimeout(()=>{
-                    window.location.href = "/"
+                    window.location.href = "/login"
             },1000)
         })
     }

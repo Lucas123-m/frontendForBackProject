@@ -36,6 +36,7 @@ export default function MainPage(){
                 <div className="animes-buttons">
                     <button id="add-anime" className="btn btn-add"><NavLink to="/newEntry">New Anime</NavLink></button>
                     <button id="add-image" className="btn btn-add"><NavLink to="/manageImages">Manage Images</NavLink></button>
+                    <button id="login" className="btn btn-login"><NavLink to="/login">Login</NavLink></button>
                 </div>
                 <hr></hr>
                 <AnimesContainer animes={dataAnimes} onDelete={setDelete} images={dataImages}/>
