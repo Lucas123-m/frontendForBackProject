@@ -29,7 +29,7 @@ export default function Login(){
         const registerSpan = $('#register-form span')
 
         const logoutButton = $('#close-session')
-
+        //console.log(logoutButton,loginForm,registerForm)
         loginForm?.addEventListener('submit', e=>{
             e.preventDefault()
             const username = $('#login-username')
@@ -38,14 +38,15 @@ export default function Login(){
             fetch(`${BASE_URL_API}/users/login`,{
                 method: 'POST',
                 headers: {'Content-Type':'Application/json'},
-                body: JSON.stringify({username: username.value,password: password.value})
+                body: JSON.stringify({username: username.value,password: password.value}),
+                credentials: 'include'
             }).then(res => {
                 if (res.ok){
                     loginSpan.innerText = "Session iniciada, entrando..."
                     loginSpan.style.color = "green"
-                    /*setTimeout(()=>{
+                    setTimeout(()=>{
                         window.location.href = "/main"
-                    },2000)*/
+                    },2000)
                 } else {
                     loginSpan.innerText = "Error al iniciar sesion."
                     loginSpan.style.color = "red"
@@ -66,14 +67,18 @@ export default function Login(){
             fetch(`${BASE_URL_API}/users/register`,{
                 method: 'POST',
                 headers: {'Content-Type':'Application/json'},
-                body: JSON.stringify({username: username.value,password: password.value})
+                body: JSON.stringify({username: username.value,password: password.value}),
+                credentials: 'include', 
             }).then(res => {
                 if (res.ok){
-                    registerSpan.innerText = "Usuario registrado, entrando..."
+                    registerSpan.innerText = "Usuario registrado, favor de logear."
                     registerSpan.style.color = "green"
                     setTimeout(()=>{
-                        window.location.href = "/main"
-                    },2000)
+                        registerSpan.innerText=""
+                    },3000)
+                    username.value = ""
+                    password.value=""
+                    confirmPassword.value=""
                 } else {
                     registerSpan.innerText = "Error al registrar usuario."
                     registerSpan.style.color = "red"
@@ -84,7 +89,8 @@ export default function Login(){
             e.preventDefault()
             fetch(`${BASE_URL_API}/users/logout`,{
                 method:'POST',
-                headers: {'Content-Type':'Application/json'}
+                headers: {'Content-Type':'Application/json'},
+                credentials: 'include', 
             }).then(res => {
                 console.log("respuesta:",res)
                 setTimeout(()=>{
@@ -110,7 +116,7 @@ export default function Login(){
                     <h2>Login</h2>
                     <label htmlFor="login-username">Username</label>
                     <input type="text" name="username" id="login-username" required />
-                    <label htmlFor="login-password">Username</label>
+                    <label htmlFor="login-password">Password</label>
                     <input type="text" name="password" id="login-password" required />
 
                     <button type="submit">Login</button>
@@ -123,10 +129,10 @@ export default function Login(){
                     <label htmlFor="register-username">Username</label>
                     <input type="text" name="username" id="register-username" required />
 
-                    <label htmlFor="register-password">Username</label>
+                    <label htmlFor="register-password">Password</label>
                     <input type="text" name="password" id="register-password" required />
 
-                    <label htmlFor="register-confirm-password">Username</label>
+                    <label htmlFor="register-confirm-password">Confirm Password</label>
                     <input type="text" name="confirm-password" id="register-confirm-password" required />
                     <button type="submit">Login</button>
                     <span>&nbsp;</span>
