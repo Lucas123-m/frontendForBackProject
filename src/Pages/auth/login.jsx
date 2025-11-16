@@ -93,8 +93,10 @@ export default function Login(){
             })
         })        
     },[])
+
     return (
     <>
+        <div className="login">
         {dataCookie ? ( 
             <div class="form-container">
                 <h2>Hola {dataCookie} </h2>
@@ -132,7 +134,7 @@ export default function Login(){
             </div>
             </>
         )}
-
+        </div>
     </>
     )
 }
