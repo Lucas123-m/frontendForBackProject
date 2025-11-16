@@ -20,99 +20,95 @@ export default function Login(){
         fetchCookie()
     },[])
 
-    useEffect(()=>{
-        const $ = el =>document.querySelector(el)
-        const loginForm = $('#login-form')
+    const $ = el =>document.querySelector(el)
+    const login = async(event)=>{
+        event.preventDefault()
         const loginSpan = $('#login-form span')
-
-        const registerForm = $('#register-form')
-        const registerSpan = $('#register-form span')
-
-        const logoutButton = $('#close-session')
-
-        loginForm?.addEventListener('submit', e=>{
-            e.preventDefault()
-            const username = $('#login-username')
-            const password = $('#login-password')
-
-            fetch(`${BASE_URL_API}/users/login`,{
-                method: 'POST',
-                headers: {'Content-Type':'Application/json'},
-                body: JSON.stringify({username: username.value,password: password.value}),
-                credentials: 'include'
-            }).then(res => {
-                if (res.ok){
-                    loginSpan.innerText = "Session iniciada, entrando..."
-                    loginSpan.style.color = "green"
-                    setTimeout(()=>{
-                        window.location.href = "/main"
-                    },2000)
-                } else {
-                    loginSpan.innerText = "Error al iniciar sesion."
-                    loginSpan.style.color = "red"
-                }
-            })
-        })
-        registerForm?.addEventListener('submit',e=>{
-            e.preventDefault()
-            const username = $('#register-username')
-            const password = $('#register-password')
-            const confirmPassword = $('#register-confirm-password')
-
-            if (password.value != confirmPassword.value){
-                alert('Passwords no dot match')
-                return
-            }
-
-            fetch(`${BASE_URL_API}/users/register`,{
-                method: 'POST',
-                headers: {'Content-Type':'Application/json'},
-                body: JSON.stringify({username: username.value,password: password.value}),
-                credentials: 'include', 
-            }).then(res => {
-                if (res.ok){
-                    registerSpan.innerText = "Usuario registrado, favor de logear."
-                    registerSpan.style.color = "green"
-                    setTimeout(()=>{
-                        registerSpan.innerText=""
-                    },3000)
-                    username.value = ""
-                    password.value=""
-                    confirmPassword.value=""
-                } else {
-                    registerSpan.innerText = "Error al registrar usuario."
-                    registerSpan.style.color = "red"
-                }
-            })
-        })
-        logoutButton?.addEventListener('click',e => {
-            e.preventDefault()
-            fetch(`${BASE_URL_API}/users/logout`,{
-                method:'POST',
-                headers: {'Content-Type':'Application/json'},
-                credentials: 'include', 
-            }).then(res => {
-                console.log("respuesta:",res)
+        const username = $('#login-username')
+        const password = $('#login-password')
+        console.log("Se activa login event")
+        fetch(`${BASE_URL_API}/users/login`,{
+            method: 'POST',
+            headers: {'Content-Type':'Application/json'},
+            body: JSON.stringify({username: username.value,password: password.value}),
+            credentials: 'include'
+        }).then(res => {
+            if (res.ok){
+                loginSpan.innerText = "Session iniciada, entrando..."
+                loginSpan.style.color = "green"
                 setTimeout(()=>{
-                        window.location.href = "/"
-                },1000)
-            })
-        })        
-    },[])
+                    window.location.href = "/main"
+                },2000)
+            } else {
+                loginSpan.innerText = "Error al iniciar sesion."
+                loginSpan.style.color = "red"
+            }
+        })
+    }
+
+    const register = async(event)=>{
+        event.preventDefault()
+        const registerSpan = $('#register-form span')
+        const username = $('#register-username')
+        const password = $('#register-password')
+        const confirmPassword = $('#register-confirm-password')
+
+        if (password.value != confirmPassword.value){
+            alert('Passwords no dot match')
+            return
+        }
+
+        fetch(`${BASE_URL_API}/users/register`,{
+            method: 'POST',
+            headers: {'Content-Type':'Application/json'},
+            body: JSON.stringify({username: username.value,password: password.value}),
+            credentials: 'include', 
+        }).then(res => {
+            if (res.ok){
+                registerSpan.innerText = "Usuario registrado, favor de logear."
+                registerSpan.style.color = "green"
+                setTimeout(()=>{
+                    registerSpan.innerText=""
+                },3000)
+                username.value = ""
+                password.value=""
+                confirmPassword.value=""
+            } else {
+                registerSpan.innerText = "Error al registrar usuario."
+                registerSpan.style.color = "red"
+            }
+        })
+    }
+
+    const logout = async(event)=>{
+        event.preventDefault()
+        fetch(`${BASE_URL_API}/users/logout`,{
+            method:'POST',
+            headers: {'Content-Type':'Application/json'},
+            credentials: 'include', 
+        }).then(res => {
+            console.log("respuesta:",res)
+            setTimeout(()=>{
+                    window.location.href = "/"
+            },1000)
+        })
+    }
 
     return (
     <>
         <div className="login">
         {dataCookie ? ( 
             <div className="form-container">
-                <h2>Hola {dataCookie} </h2>
-                <p>Estas en el panel de administracion</p>
-                <button id="close-session">Cerrar sesion</button>
+                <form onSubmit={logout}>
+                    <h2>Hola {dataCookie} </h2>
+                    <p>Estas en el panel de administracion</p>
+                    <button type="submit">Cerrar sesion</button>
+                </form>
             </div>
         ) : (
             <>
             <div className="form-container">
-                <form id="login-form">
+                <form onSubmit={login} id="login-form">
                     <h2>Login</h2>
                     <label htmlFor="login-username">Username</label>
                     <input type="text" name="username" id="login-username" required />
@@ -124,7 +120,7 @@ export default function Login(){
                 </form>
             </div>
             <div className="form-container">
-                <form id="register-form">
+                <form onSubmit={register} id="register-form">
                     <h2>Register</h2>
                     <label htmlFor="register-username">Username</label>
                     <input type="text" name="username" id="register-username" required />
