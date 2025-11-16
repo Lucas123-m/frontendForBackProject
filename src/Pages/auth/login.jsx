@@ -43,9 +43,9 @@ export default function Login(){
                 if (res.ok){
                     loginSpan.innerText = "Session iniciada, entrando..."
                     loginSpan.style.color = "green"
-                    setTimeout(()=>{
+                    /*setTimeout(()=>{
                         window.location.href = "/main"
-                    },2000)
+                    },2000)*/
                 } else {
                     loginSpan.innerText = "Error al iniciar sesion."
                     loginSpan.style.color = "red"
@@ -98,35 +98,35 @@ export default function Login(){
     <>
         <div className="login">
         {dataCookie ? ( 
-            <div class="form-container">
+            <div className="form-container">
                 <h2>Hola {dataCookie} </h2>
                 <p>Estas en el panel de administracion</p>
                 <button id="close-session">Cerrar sesion</button>
             </div>
         ) : (
             <>
-            <div class="form-container">
+            <div className="form-container">
                 <form id="login-form">
                     <h2>Login</h2>
-                    <label for="login-username">Username</label>
+                    <label htmlFor="login-username">Username</label>
                     <input type="text" name="username" id="login-username" required />
-                    <label for="login-password">Username</label>
+                    <label htmlFor="login-password">Username</label>
                     <input type="text" name="password" id="login-password" required />
 
                     <button type="submit">Login</button>
                     <span>&nbsp;</span>
                 </form>
             </div>
-            <div class="form-container">
+            <div className="form-container">
                 <form id="register-form">
                     <h2>Register</h2>
-                    <label for="register-username">Username</label>
+                    <label htmlFor="register-username">Username</label>
                     <input type="text" name="username" id="register-username" required />
 
-                    <label for="register-password">Username</label>
+                    <label htmlFor="register-password">Username</label>
                     <input type="text" name="password" id="register-password" required />
 
-                    <label for="register-confirm-password">Username</label>
+                    <label htmlFor="register-confirm-password">Username</label>
                     <input type="text" name="confirm-password" id="register-confirm-password" required />
                     <button type="submit">Login</button>
                     <span>&nbsp;</span>
