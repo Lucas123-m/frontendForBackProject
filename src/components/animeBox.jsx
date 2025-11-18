@@ -7,7 +7,7 @@ import ReadMoreIcon from '@mui/icons-material/ReadMore';
 export default function AnimeBox({imgSrc, title, alt, seasons,id,onDelete}){
     const deleteAnime =  async (id)=>{
         const url_api=`http://localhost:3000/animes/series`
-        const res = await fetch(`${url_api}/${id}`,{method: "DELETE"});
+        const res = await fetch(`${url_api}/${id}`,{method: "DELETE",credentials: "include"});
         const data = await res.json();
         console.log(data)
         onDelete(c => !c)
